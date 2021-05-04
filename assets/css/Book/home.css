@@ -1,0 +1,43 @@
+
+
+
+.home-page {
+    padding-top: 15vh;
+    height: 100vh;
+    margin: 0%;
+}
+
+.hero-txt{
+    position: absolute;
+    font-size: 4rem;
+    top: 30%;
+    left: 20%;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 0 #fff;
+}
+
+.hero-txt span{
+    font-size: 4rem;
+    font-family: inherit;
+    color: #04b0d8;
+    text-shadow: 0 0 0 #04b0d8;
+}
+
+.hero-btn{
+    position: absolute;
+    font-size: 1.7rem;
+    top: 40%;
+    left: 40%;
+    background-color: #04b0d8;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    border: none;
+    padding: 10px 30px;
+}
+
+.hero-btn:hover{
+    color: #04b0d8;
+    background-color: white;
+    box-shadow: 0 0 8px 2px #04b1d865;
+}

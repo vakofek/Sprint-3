@@ -1,0 +1,106 @@
+@import url(//db.onlinewebfonts.com/c/bdf273232619ad82be7bdba64f709172?family=EurocratW01-Light);
+@import url(../css/Book/rate.css);
+@import url(../css/Book/header.css);
+@import url(../css/Book/home.css);
+@import url(../css/Book/books.css);
+@import url(../css/Book/book-details.css);
+@import url(../css/Book/book-reviews.css);
+@import url(../css/Book/add-book.css);
+@import url(../css/Book/user-msg.css);
+@import url(../css/Book/about.css);
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0%;
+    background-color: #dfdace;
+    font-family: 'EurocratW01-light', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0%;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1rem;
+}
+
+h4 {
+    font-size: 0.8rem;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+    background-color: unset;
+}
+
+ul{
+    padding: 0%;
+}
+
+main{
+    margin-top: 15vh;
+    padding: 2vw;
+}
+
+span{
+    font-family: unset;
+    font-weight: unset;
+}
+
+/* HELPERS */
+
+.danger {
+    color: red;
+}
+
+.success {
+    color: rgb(26, 196, 11);
+}
+
+button.success-btn {
+    box-shadow: 0 0 0 2px rgb(26, 196, 11);
+    color: rgb(26, 196, 11);
+}
+
+button.success-btn:hover {
+    background-color: rgb(26, 196, 11);
+    color: white;
+}
+
+button.danger-btn {
+    box-shadow: 0 0 0 2px red;
+    color: red;
+}
+
+button.danger-btn:hover {
+    background-color: red;
+    color: white;
+}
+
+button.secondary-btn {
+    box-shadow: 0 0 0 2px rgb(129, 129, 129);
+    color: rgb(129, 129, 129);
+}
+
+button.secondary-btn:hover {
+    background-color: rgb(129, 129, 129);
+    color: white;
+}

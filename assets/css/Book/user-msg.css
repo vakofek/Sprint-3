@@ -1,0 +1,55 @@
+.user-msg {
+    position: absolute;
+    top: 35vh;
+    left: 10vw;
+    width: 80vw;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(230, 230, 230);
+    box-shadow: 0 0 7px 1px #00000047;
+}
+
+@media (min-width:450px) {
+    .user-msg {
+        left: 20vw;
+        width: 60vw;
+    }
+}
+
+@media (min-width:700px) {
+    .user-msg {
+        left: 30vw;
+        width: 40vw;
+    }
+}
+
+.user-msg img {
+    height: 6vw;
+    width: 6vw;
+}
+
+.user-msg-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-msg button {
+    cursor: pointer;
+    font-family: inherit;
+    padding: 5px 10px;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: 0.3s;
+    border: none;
+}

@@ -1,0 +1,54 @@
+.add-book {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.add-book form {
+    width: 100%;
+}
+
+.add-book input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    font-size: 1.3rem;
+    color: rgb(46, 46, 46);
+    background-image: url(../img/search.png);
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: 99% 50%;
+}
+
+.add-book .search-result {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 3vw;
+    color: rgb(46, 46, 46);
+    gap: 20px;
+}
+
+.add-book .search-preview {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.add-book .search-preview button {
+    background-color: transparent;
+    color: rgb(46, 46, 46);
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.add-book .search-preview button:hover {
+    color: rgb(26, 196, 11);
+}
+

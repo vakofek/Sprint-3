@@ -1,0 +1,94 @@
+.review-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2vw;
+    width: 100%;
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: flex-start;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    gap: 0.5vh;
+}
+
+@media (min-width: 640px) {
+    .review-area {
+        flex-direction: row;
+    }
+
+    .review-form {
+        max-width: 50%;
+    }
+    
+}
+
+.user-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+}
+
+@media (min-width: 640px){
+    .user-info{
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 1110px){
+    .user-info{
+        flex-direction: row;
+    }
+}
+
+.review-form input{
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 150px;
+  height: 30px;
+}
+
+.book-details textarea {
+    width: 100%;
+    padding: 10px 20px;
+    resize: none;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.users-reviews {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    width: 100%;
+}
+
+h2.users-reviews {
+    align-items: center;
+    justify-content: center;
+}
+
+.user-review {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1vh;
+    background-color: rgb(243, 243, 243);
+    box-shadow: 0 0 4px 1px #00000038;
+    border-radius: 5px;
+    padding: 1vw;
+}
+
+.user-review button{
+width: 100px;
+}
