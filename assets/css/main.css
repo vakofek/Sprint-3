@@ -1,6 +1,6 @@
 @import url(//db.onlinewebfonts.com/c/bdf273232619ad82be7bdba64f709172?family=EurocratW01-Light);
 @import url(../css/Book/rate.css);
-@import url(../css/Book/header.css);
+@import url(../css/header.css);
 @import url(../css/Book/home.css);
 @import url(../css/Book/books.css);
 @import url(../css/Book/book-details.css);
@@ -8,6 +8,7 @@
 @import url(../css/Book/add-book.css);
 @import url(../css/Book/user-msg.css);
 @import url(../css/Book/about.css);
+@import url(../css/Mail.css);
 
 * {
     box-sizing: border-box;

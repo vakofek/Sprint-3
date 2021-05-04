@@ -1,4 +1,5 @@
 const { NavLink } = ReactRouterDOM
+
 import { bookService } from '../services/book.service.js'
 import { BookList } from '../Book/BookList.jsx'
 import { BookFilter } from '../../cmps/Book/BookFilter.jsx'
@@ -30,8 +31,10 @@ export class BookGallery extends React.Component {
         if (!books) return <div>Loading...</div>
         return (
             <main className="book-app">
-                <BookFilter onSetFilter={this.onSetFilter} />
-                <NavLink to="/add-book">Add Book</NavLink>
+                <div className="filter-add-book-container">
+                    <BookFilter onSetFilter={this.onSetFilter} />
+                    <NavLink to="/book/add-book">Add Book</NavLink>
+                </div>
                 <BookList books={books} />
             </main>
         )

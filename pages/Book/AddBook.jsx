@@ -1,5 +1,5 @@
-import { bookService } from '../services/book.service.js'
-import { eventBusService } from '../services/eventbus.service.js'
+import { bookService } from '../../services/Book/book.service.js'
+import { eventBusService } from '../../services/event-bus-service.js'
 import { UserMsg } from '../../cmps/Book/UserMsg.jsx'
 
 export class AddBook extends React.Component {
@@ -7,10 +7,6 @@ export class AddBook extends React.Component {
     state = {
         searchStr: '',
         books: []
-    }
-
-    componentDidMount(){
-        console.log('add book');
     }
 
     handleChange = (ev) => {
