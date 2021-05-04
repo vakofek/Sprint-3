@@ -28,40 +28,36 @@ export class EmailDetails extends React.Component {
     goBack = () => {
         this.props.history.push('/mail')
     }
-    // getShortDescription = (description) => {
-    //     return description.substring(0, 100) + '...'
-    // }
-
-    // onRemoveReview = (reviewId) => {
-    //     bookService.removeReview(reviewId, this.state.book.id)
-    //     this.loadMail()
-    // }
 
     render() {
         const { mail, action } = this.state
         if (!mail) return <div>Loading...</div>
 
         return (
-            <main className="mail-details">
-                <h3>{mail.subject}</h3>
-                {(mail.state === 'sent' || mail.state === 'drafts') && <div className="mail-from-info">
-                    <h4>{mail.origin.to.name}</h4>
-                    <h4>{mail.origin.to.mail}</h4>
-                </div>}
-                {(mail.state === 'received' ||mail.state === 'starred') && <div className="mail-from-info">
-                    <h4>{mail.origin.to.name}</h4>
-                    <h4>{mail.origin.to.mail}</h4>
-                </div>}
-                <p>{mail.body}</p>
-                <button onClick={() => {
-                    this.setState({ action: 'reply' })
-                }}>Reply</button>
-                <button onClick={() => {
-                    this.setState({ action: 'forward' })
-                }}>Forward</button>
+            <section >
+                <div className="mail-details">
+                    <button onClick={this.goBack} ><i className="fas fa-times"></i></button>
+                    <h3>{mail.subject}</h3>
+                    {(mail.state === 'sent' || mail.state === 'drafts') && <div className="mail-from-info">
+                        <h4>{mail.origin.to.name}</h4>
+                        <h4>{mail.origin.to.mail}</h4>
+                    </div>}
+                    {(mail.state === 'received' || mail.state === 'starred') && <div className="mail-from-info">
+                        <h4>{mail.origin.to.name}</h4>
+                        <h4>{mail.origin.to.mail}</h4>
+                    </div>}
+                    <p className="mail-details-body">{mail.body}</p>
+                    <div className="mail-details-btn-container">
+                        <button onClick={() => {
+                            this.setState({ action: 'reply' })
+                        }}><i className="fas fa-reply"></i></button>
+                        <button onClick={() => {
+                            this.setState({ action: 'forward' })
+                        }}><i className="far fa-share-square"></i></button>
+                    </div>
+                </div>
                 {action && <MailAction mail={mail} action={action} goBack={this.goBack} closeAction={() => { this.setState({ action: '' }) }} />}
-                <button onClick={this.goBack} >X</button>
-            </main >
+            </section >
         )
     }
 }

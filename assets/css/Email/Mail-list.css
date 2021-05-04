@@ -1,0 +1,74 @@
+
+.email-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mail-preview {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0px #00000040;
+    max-height: 80px;
+}
+
+.mail-preview:hover {
+    background-color: white;
+    box-shadow: 0 0 5px 3px #00000040;
+}
+
+.mail-preview-info{
+    flex: 1;
+    width: 70%;
+}
+
+.mail-preview-subject {
+    color: rgb(0, 0, 0);
+    font-size: 1.2rem;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.mail-preview-body {
+    color: rgb(95, 95, 95);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.mail-preview-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mail-preview button{
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.mail-preview-btn-container .star-btn:hover{
+    color: goldenrod;
+}
+
+.mail-preview-btn-container .remove-btn:hover{
+    color: rgb(199, 11, 11);
+}
+
+.mail-preview-btn-container .read-btn:hover{
+    color: rgb(11, 23, 199);
+}
+
+.star-on {
+    color: goldenrod;
+}
+
+.read-on {
+    background-color: rgba(228, 228, 228, 0.507);
+}

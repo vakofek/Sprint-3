@@ -50,13 +50,17 @@ export class EmailPreview extends React.Component {
 
     onRemoveMail = () => {
         emailService.removeMail(this.state.mail.mailId)
-            .then(() => { this.props.loadMails() })
+            .then(() => {
+                this.props.loadMails()
+                eventBusService.emit('update-statistics')
+            })
+
     }
 
     onToggleRead = () => {
         emailService.toggleRead(this.state.mail.mailId)
             .then((mail) => {
-                this.setState({ mail } , eventBusService.emit('update-statistics'))
+                this.setState({ mail }, eventBusService.emit('update-statistics'))
             })
     }
 
@@ -71,14 +75,16 @@ export class EmailPreview extends React.Component {
         if (!mail) return <div>Lading...</div>
         return (
             <section className={'mail-preview' + this.getReadClass()}>
-                <Link onClick={this.onToggleRead} to={`/mail/${mail.mailId}`}>
-                    <h3 className="mail-preview-subject">{this.getShortTxt(mail.subject, 20)}</h3>
-                    <h3 className="mail-preview-body">{this.getShortTxt(mail.body, 40)}</h3>
+                <Link className="mail-preview-info" onClick={this.onToggleRead} to={`/mail/${mail.mailId}`}>
+                    <h3 className="mail-preview-subject">{this.getShortTxt(mail.subject, 50)}</h3>
+                    <h3 className="mail-preview-body">{this.getShortTxt(mail.body, 200)}</h3>
                     <h3>{this.getSentAtTime(mail.sentAt)}</h3>
                 </Link>
-                <button className={'star-btn' + this.getStarClass()} onClick={this.onToggleStar} >★</button>
-                <button onClick={this.onRemoveMail} > X </button>
-                <button onClick={this.onToggleRead} >{this.getReadIcon()}</button>
+                <div className="mail-preview-btn-container">
+                    <button className={'star-btn' + this.getStarClass()} onClick={this.onToggleStar} ><i className="far fa-star"></i></button>
+                    <button className="remove-btn" onClick={this.onRemoveMail} > <i className="far fa-trash-alt"></i> </button>
+                    <button className="read-btn" onClick={this.onToggleRead} >{this.getReadIcon()}</button>
+                </div>
             </section>
         )
     }

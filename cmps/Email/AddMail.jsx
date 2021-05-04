@@ -30,7 +30,7 @@ export class AddMail extends React.Component {
     render() {
         const { to, copy, subject, body } = this.state.mail
         return (
-            <form>
+            <form className="add-mail">
                 <label htmlFor="">To</label>
                 <input name="to" type="text" value={to.mail} onChange={this.handleChange} />
 
@@ -41,9 +41,10 @@ export class AddMail extends React.Component {
                 <input name="subject" type="text" value={subject} onChange={this.handleChange} />
 
                 <textarea name="body" value={body} onChange={this.handleChange} />
-
-                <button onClick={this.sendMail} >Send</button>
-                <button onClick={this.goBack}>Delete</button>
+                <div className="add-mail-btn-container">
+                    <button className="add-mail-btn-send" onClick={this.sendMail} ><i className="far fa-paper-plane"></i></button>
+                    <button className="add-mail-btn-remove" onClick={this.goBack}><i className="far fa-trash-alt"></i></button>
+                </div>
             </form>
         )
     }

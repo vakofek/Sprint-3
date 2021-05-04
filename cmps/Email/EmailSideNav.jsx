@@ -1,48 +1,47 @@
-const { Link } = ReactRouterDOM
+const { Link, NavLink } = ReactRouterDOM
 import { emailService } from '../../services/Email/email.service.js'
 import { eventBusService } from '../../services/event-bus-service.js'
 
 // export function EmailSideNav(props) {
 export class EmailSideNav extends React.Component {
 
-    state={
+    state = {
         readStatistics: null
     }
 
     removeReloadEvent;
 
-    componentDidMount(){
-        this.setState({readStatistics: this.onGetReadStatistics()})
-        this.removeReloadEvent = eventBusService.on('update-statistics', ()=>{
-            this.setState({readStatistics: this.onGetReadStatistics()})
+    componentDidMount() {
+        this.setState({ readStatistics: this.onGetReadStatistics() })
+        this.removeReloadEvent = eventBusService.on('update-statistics', () => {
+            this.setState({ readStatistics: this.onGetReadStatistics() })
         })
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.removeReloadEvent()
     }
 
-    updateSelectedFilter = ({ target }) => {
-        eventBusService.emit('mail-set-filter', target.value)
+    updateSelectedFilter = (value) => {
+        eventBusService.emit('mail-set-filter', value)
     }
 
-    onGetReadStatistics=()=>{
+    onGetReadStatistics = () => {
         return emailService.getReadStatistics()
     }
-    
+
 
     render() {
 
         return (
-            <div>
-                <h1>Email Side Nav</h1>
-                <Link to="/mail/add-mail"><button>+</button></Link>
-                <button value="received" onClick={this.updateSelectedFilter}>Inbox</button>
-                <button value="starred" onClick={this.updateSelectedFilter}>Starred</button>
-                <button value="sent" onClick={this.updateSelectedFilter}>Sent Mail</button>
-                <button value="drafts" onClick={this.updateSelectedFilter}>Drafts</button>
+            <section className="email-side-nav">
+                <Link className="add-mail-btn" to="/mail/add-mail"><i className="fas fa-plus"></i><span>Compose Mail</span></Link>
+                <NavLink onClick={() => { this.updateSelectedFilter('received') }}>Inbox</NavLink>
+                <NavLink onClick={() => { this.updateSelectedFilter('starred') }}>Starred</NavLink>
+                <NavLink onClick={() => { this.updateSelectedFilter('sent') }}>Sent Mail</NavLink>
+                <NavLink onClick={() => { this.updateSelectedFilter('drafts') }}>Drafts</NavLink>
                 <h2>{this.onGetReadStatistics()}% Read</h2>
-            </div>
+            </section>
         )
     }
 }

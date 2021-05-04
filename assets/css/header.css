@@ -26,14 +26,6 @@ header {
     gap: 10px;
 }
 
-.header-txt {
-    display: flex;
-    flex-direction: column;
-    min-width: 25vw;
-    color: rgb(233, 233, 233);
-    text-shadow: 3px 0 6px black;
-}
-
 header img {
     height: 2.5rem;
     width: 3.5rem;

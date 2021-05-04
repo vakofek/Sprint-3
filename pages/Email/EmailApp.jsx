@@ -12,11 +12,13 @@ export function EmailApp() {
         <Router>
             <main className="email-app">
                 <EmailSideNav />
-                <Switch>
-                    <Route component={AddMail} path="/mail/add-mail" />
-                    <Route component={EmailDetails} path="/mail/:mailId" />
-                    <Route component={EmailList} path="/mail" />
-                </Switch>
+                <div className="email-container">
+                    <Switch>
+                        <Route component={AddMail} path="/mail/add-mail" />
+                        <Route component={EmailDetails} path="/mail/:mailId" />
+                        <Route component={EmailList} path="/mail" />
+                    </Switch>
+                </div>
             </main>
         </Router>
     )
