@@ -1,5 +1,5 @@
 import { RateStars } from '../../cmps/Book/RateStars.jsx'
-import { bookService } from '../services/book.service.js'
+import { bookService } from '../../services/Book/book.service.js'
 
 export class ReviewAdd extends React.Component {
 

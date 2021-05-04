@@ -1,3 +1,4 @@
+
 import { emailService } from '../../services/Email/email.service.js'
 import { MailAction } from '../../cmps/Email/MailAction.jsx'
 // import { ReviewAdd } from '../../cmps/Book/ReBookviewAdd.jsx'
@@ -24,6 +25,9 @@ export class EmailDetails extends React.Component {
             })
     }
 
+    goBack = () => {
+        this.props.history.push('/mail')
+    }
     // getShortDescription = (description) => {
     //     return description.substring(0, 100) + '...'
     // }
@@ -34,16 +38,20 @@ export class EmailDetails extends React.Component {
     // }
 
     render() {
-        const { mail , action} = this.state
+        const { mail, action } = this.state
         if (!mail) return <div>Loading...</div>
 
         return (
             <main className="mail-details">
                 <h3>{mail.subject}</h3>
-                <div className="mail-from-info">
-                    <h4>{mail.from.name}</h4>
-                    <h4>{mail.from.mail}</h4>
-                </div>
+                {(mail.state === 'sent' || mail.state === 'drafts') && <div className="mail-from-info">
+                    <h4>{mail.origin.to.name}</h4>
+                    <h4>{mail.origin.to.mail}</h4>
+                </div>}
+                {(mail.state === 'received' ||mail.state === 'starred') && <div className="mail-from-info">
+                    <h4>{mail.origin.to.name}</h4>
+                    <h4>{mail.origin.to.mail}</h4>
+                </div>}
                 <p>{mail.body}</p>
                 <button onClick={() => {
                     this.setState({ action: 'reply' })
@@ -51,8 +59,8 @@ export class EmailDetails extends React.Component {
                 <button onClick={() => {
                     this.setState({ action: 'forward' })
                 }}>Forward</button>
-                {action && <MailAction mail={mail} action={action}/>}
-              
+                {action && <MailAction mail={mail} action={action} goBack={this.goBack} closeAction={() => { this.setState({ action: '' }) }} />}
+                <button onClick={this.goBack} >X</button>
             </main >
         )
     }

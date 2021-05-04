@@ -1,4 +1,3 @@
-import { bookService } from '../services/book.service.js'
 export class UsersReviews extends React.Component {
 
     state = {

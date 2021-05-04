@@ -1,5 +1,5 @@
 const { Link } = ReactRouterDOM
-import { bookService } from '../services/book.service.js'
+import { bookService } from '../../services/Book/book.service.js'
 
 export class BookPreview extends React.Component {
 

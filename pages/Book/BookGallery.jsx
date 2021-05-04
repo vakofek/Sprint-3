@@ -1,6 +1,6 @@
 const { NavLink } = ReactRouterDOM
 
-import { bookService } from '../services/book.service.js'
+import { bookService } from '../../services/Book/book.service.js'
 import { BookList } from '../Book/BookList.jsx'
 import { BookFilter } from '../../cmps/Book/BookFilter.jsx'
 

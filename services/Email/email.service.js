@@ -1,12 +1,14 @@
 
 import { utilService } from '../util-service.js'
 import { storageService } from '../storage-service.js'
+import { func } from 'prop-types'
 
 export const emailService = {
     query,
     getMailById,
     addReview,
     removeReview,
+    addMail
 }
 
 var gMails = []
@@ -15,13 +17,10 @@ _createMails()
 
 function query(filterBy) {
     if (filterBy) {
-        var { title, minPrice, maxPrice } = filterBy
-        minPrice = (!minPrice) ? 0 : minPrice
-        maxPrice = (!maxPrice) ? Infinity : maxPrice
-        var books = gMails.filter((book) => {
-            return book.title.includes(title) && book.listPrice.amount > minPrice && book.listPrice.amount < maxPrice
+        var mails = gMails.filter((mail) => {
+            return mail.state === filterBy
         })
-        return Promise.resolve(books)
+        return Promise.resolve(mails)
     }
     return Promise.resolve(gMails)
 }
@@ -55,31 +54,70 @@ function removeReview(reviewId, bookId) {
     book.reviews.splice(reviewIdx, 1)
 }
 
-// function searchBook(bookTitle) {
-//     const prm = axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${bookTitle}`)
-//         .then(res => res.data)
-//     return prm
-// }
+function addMail(info) {
+    const { subject, to, body } = info
+    var mail = {
+        origin: {
+            to: { mail: to, name: utilService.makeLorem(2) },
+            from: { mail: 'user@gmail.com', name: 'user' }
+        },
+        mailId: utilService.makeId(),
+        subject: subject,
+        body: body,
+        isRead: true,
+        sentAt: Date.now(),
+        state: 'sent'
+    }
+    gMails.unshift(mail);
+    _saveMailsToStorage();
+}
 
 function _createMail() {
+    var states = ['sent', 'received', 'starred', 'drafts']
     var mail = {
-        from: { mail: `${utilService.makeLorem(1)}@gamil.com`, name: utilService.makeLorem(2) },
         mailId: utilService.makeId(),
         subject: utilService.makeLorem(10),
         body: utilService.makeLorem(utilService.getRandomIntInclusive(20, 80)),
         isRead: Math.random() > 0.5,
-        sentAt: Date.now()
+        sentAt: Date.now(),
+        state: states[utilService.getRandomIntInclusive(0, 3)],
     }
-    console.log(mail);
+    mail.origin = _getOrigin(mail.state);
     gMails.unshift(mail)
     _saveMailsToStorage()
 }
+
+function _getOrigin(state) {
+    switch (state) {
+        case 'sent':
+            return {
+                to: { mail: `${utilService.makeLorem(1)}@gamil.com`, name: utilService.makeLorem(2) },
+                from: { mail: 'user@gmail.com', name: 'user' }
+            }
+        case 'received':
+            return {
+                to: { mail: 'user@gmail.com', name: 'user' },
+                from: { mail: `${utilService.makeLorem(1)}@gamil.com`, name: utilService.makeLorem(2) }
+            }
+        case 'starred':
+            return {
+                to: { mail: 'user@gmail.com', name: 'user' },
+                from: { mail: `${utilService.makeLorem(1)}@gamil.com`, name: utilService.makeLorem(2) }
+            }
+        case 'drafts':
+            return {
+                to: { mail: `${utilService.makeLorem(1)}@gamil.com`, name: utilService.makeLorem(2) },
+                from: { mail: 'user@gmail.com', name: 'user' }
+            }
+    }
+}
+
 
 function _createMails() {
     gMails = _loadMailsFromStorage()
     if (!gMails || gMails.length === 0) {
         gMails = []
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < 50; i++) {
             _createMail()
         }
     }
