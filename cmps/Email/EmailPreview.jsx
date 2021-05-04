@@ -61,6 +61,7 @@ export class EmailPreview extends React.Component {
         emailService.toggleRead(this.state.mail.mailId)
             .then((mail) => {
                 this.setState({ mail }, eventBusService.emit('update-statistics'))
+                this.props.loadMails()
             })
     }
 

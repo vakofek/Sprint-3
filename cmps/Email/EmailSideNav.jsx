@@ -40,6 +40,7 @@ export class EmailSideNav extends React.Component {
                 <NavLink onClick={() => { this.updateSelectedFilter('starred') }}>Starred</NavLink>
                 <NavLink onClick={() => { this.updateSelectedFilter('sent') }}>Sent Mail</NavLink>
                 <NavLink onClick={() => { this.updateSelectedFilter('drafts') }}>Drafts</NavLink>
+                <NavLink onClick={() => { this.updateSelectedFilter('read') }}>Read</NavLink>
                 <h2>{this.onGetReadStatistics()}% Read</h2>
             </section>
         )

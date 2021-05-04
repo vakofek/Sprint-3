@@ -11,7 +11,9 @@ export const emailService = {
     toggleStar,
     removeMail,
     toggleRead,
-    getReadStatistics
+    getReadStatistics,
+    searchMail,
+    sortBy
 }
 
 var gMails = []
@@ -35,6 +37,8 @@ function filterMails(filterBy) {
             return _filterByKey('isStarred')
         case 'drafts':
             return _filterByKey('isDraft')
+        case 'read':
+            return _filterByKey('isRead')
     }
 }
 
@@ -58,11 +62,11 @@ function toggleRead(mailId) {
     )
 }
 
-function getReadStatistics(){
-    var readMails = gMails.filter((mail)=>{
+function getReadStatistics() {
+    var readMails = gMails.filter((mail) => {
         return mail.isRead === true
     })
-    return Math.floor((readMails.length / gMails.length)* 100)
+    return Math.floor((readMails.length / gMails.length) * 100)
 }
 
 
@@ -85,6 +89,43 @@ function _filterByKey(key) {
     return gMails.filter((mail) => {
         return mail[key] === true
     })
+}
+
+function sortBy(sortType, sortDir) {
+    // debugger
+    if (sortType === 'date') {
+        var mails= gMails.sort((a, b) => {
+            if (sortDir === 'down'){
+                return a.sentAt - b.sentAt} 
+            return b.sentAt - a.sentAt
+        })
+    }
+    else {
+        if (sortDir === 'down') return (
+            items.sort(function (a, b) {
+                var mailA = a.subject.toUpperCase();
+                var mailB = b.subject.toUpperCase();
+                if (mailA < mailB) {
+                    return -1;
+                }
+                if (mailA > mailB) {
+                    return 1;
+                }
+                return 0;
+            }));
+        else return (items.sort(function (a, b) {
+            var mailA = a.subject.toUpperCase();
+            var mailB = b.subject.toUpperCase();
+            if (mailA > mailB) {
+                return -1;
+            }
+            if (mailA < mailB) {
+                return 1;
+            }
+            return 0;
+        }))
+    }
+    console.log( mails);
 }
 
 function getMailById(mailId) {
@@ -170,6 +211,16 @@ function _getOrigin(state) {
                 from: { mail: `${utilService.makeLorem(1)}@gamil.com`, name: utilService.makeLorem(2) }
             }
     }
+}
+
+function searchMail(searchTxt) {
+    var mails = gMails.filter((mail) => {
+        return mail.subject.includes(searchTxt) || mail.body.includes(searchTxt)
+            || mail.origin.to.name.includes(searchTxt) || mail.origin.from.name.includes(searchTxt)
+            || mail.origin.to.mail.includes(searchTxt) || mail.origin.from.mail.includes(searchTxt)
+    })
+    if (!mails) return Promise.resolve(gMails)
+    return Promise.resolve(mails)
 }
 
 
