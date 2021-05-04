@@ -1,14 +1,17 @@
 
 import { utilService } from '../util-service.js'
 import { storageService } from '../storage-service.js'
-import { func } from 'prop-types'
 
 export const emailService = {
     query,
     getMailById,
     addReview,
     removeReview,
-    addMail
+    addMail,
+    toggleStar,
+    removeMail,
+    toggleRead,
+    getReadStatistics
 }
 
 var gMails = []
@@ -17,20 +20,84 @@ _createMails()
 
 function query(filterBy) {
     if (filterBy) {
-        var mails = gMails.filter((mail) => {
-            return mail.state === filterBy
-        })
-        return Promise.resolve(mails)
+        return Promise.resolve(filterMails(filterBy))
     }
     return Promise.resolve(gMails)
 }
 
+function filterMails(filterBy) {
+    switch (filterBy) {
+        case 'sent':
+            return _filterByState(filterBy)
+        case 'received':
+            return _filterByState(filterBy)
+        case 'starred':
+            return _filterByKey('isStarred')
+        case 'drafts':
+            return _filterByKey('isDraft')
+    }
+}
+
+function toggleStar(mailId) {
+    return Promise.resolve(
+        getMailById(mailId)
+            .then((mail) => {
+                mail.isStarred = !mail.isStarred
+                return mail
+            })
+    )
+}
+
+function toggleRead(mailId) {
+    return Promise.resolve(
+        getMailById(mailId)
+            .then((mail) => {
+                mail.isRead = !mail.isRead
+                return mail
+            })
+    )
+}
+
+function getReadStatistics(){
+    var readMails = gMails.filter((mail)=>{
+        return mail.isRead === true
+    })
+    return Math.floor((readMails.length / gMails.length)* 100)
+}
+
+
+function removeMail(mailId) {
+    var mailIdx = getMailIdxById(mailId)
+    gMails.splice(mailIdx, 1)
+    _saveMailsToStorage()
+    return Promise.resolve()
+}
+
+
+
+function _filterByState(filterBy) {
+    return gMails.filter((mail) => {
+        return mail.state === filterBy
+    })
+}
+
+function _filterByKey(key) {
+    return gMails.filter((mail) => {
+        return mail[key] === true
+    })
+}
 
 function getMailById(mailId) {
     var currMail = gMails.find((mail) => {
         return mail.mailId === mailId
     })
     return Promise.resolve(currMail)
+}
+
+function getMailIdxById(mailId) {
+    return gMails.findIndex((mail) => {
+        return mail.mailId === mailId
+    })
 }
 
 
@@ -66,21 +133,24 @@ function addMail(info) {
         body: body,
         isRead: true,
         sentAt: Date.now(),
-        state: 'sent'
+        state: 'sent',
+        isStarred: false,
+        isDraft: false
     }
     gMails.unshift(mail);
     _saveMailsToStorage();
 }
 
 function _createMail() {
-    var states = ['sent', 'received', 'starred', 'drafts']
     var mail = {
         mailId: utilService.makeId(),
         subject: utilService.makeLorem(10),
         body: utilService.makeLorem(utilService.getRandomIntInclusive(20, 80)),
         isRead: Math.random() > 0.5,
         sentAt: Date.now(),
-        state: states[utilService.getRandomIntInclusive(0, 3)],
+        state: Math.random() > 0.5 ? 'sent' : 'received',
+        isStarred: Math.random() > 0.5,
+        isDraft: Math.random() > 0.5
     }
     mail.origin = _getOrigin(mail.state);
     gMails.unshift(mail)
@@ -98,16 +168,6 @@ function _getOrigin(state) {
             return {
                 to: { mail: 'user@gmail.com', name: 'user' },
                 from: { mail: `${utilService.makeLorem(1)}@gamil.com`, name: utilService.makeLorem(2) }
-            }
-        case 'starred':
-            return {
-                to: { mail: 'user@gmail.com', name: 'user' },
-                from: { mail: `${utilService.makeLorem(1)}@gamil.com`, name: utilService.makeLorem(2) }
-            }
-        case 'drafts':
-            return {
-                to: { mail: `${utilService.makeLorem(1)}@gamil.com`, name: utilService.makeLorem(2) },
-                from: { mail: 'user@gmail.com', name: 'user' }
             }
     }
 }

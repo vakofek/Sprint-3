@@ -8,7 +8,7 @@
 @import url(../css/Book/add-book.css);
 @import url(../css/Book/user-msg.css);
 @import url(../css/Book/about.css);
-@import url(../css/Mail.css);
+@import url(../css/Email/Mail.css);
 
 * {
     box-sizing: border-box;

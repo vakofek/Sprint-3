@@ -1,15 +1,35 @@
 const { Link } = ReactRouterDOM
+import { emailService } from '../../services/Email/email.service.js'
 import { eventBusService } from '../../services/event-bus-service.js'
 
 // export function EmailSideNav(props) {
 export class EmailSideNav extends React.Component {
 
+    state={
+        readStatistics: null
+    }
+
     removeReloadEvent;
+
+    componentDidMount(){
+        this.setState({readStatistics: this.onGetReadStatistics()})
+        this.removeReloadEvent = eventBusService.on('update-statistics', ()=>{
+            this.setState({readStatistics: this.onGetReadStatistics()})
+        })
+    }
+
+    componentWillUnmount(){
+        this.removeReloadEvent()
+    }
 
     updateSelectedFilter = ({ target }) => {
         eventBusService.emit('mail-set-filter', target.value)
-        eventBusService.emit('load-mails')
     }
+
+    onGetReadStatistics=()=>{
+        return emailService.getReadStatistics()
+    }
+    
 
     render() {
 
@@ -21,6 +41,7 @@ export class EmailSideNav extends React.Component {
                 <button value="starred" onClick={this.updateSelectedFilter}>Starred</button>
                 <button value="sent" onClick={this.updateSelectedFilter}>Sent Mail</button>
                 <button value="drafts" onClick={this.updateSelectedFilter}>Drafts</button>
+                <h2>{this.onGetReadStatistics()}% Read</h2>
             </div>
         )
     }

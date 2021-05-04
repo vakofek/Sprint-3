@@ -35,7 +35,7 @@ export class EmailList extends React.Component {
         return (
             <section className="email-list">
                 { mails.map((mail) => {
-                    return <EmailPreview key={mail.mailId} mail={mail} />
+                    return <EmailPreview key={mail.mailId} mail={mail} loadMails={this.loadMails} />
                 })}
 
             </section>

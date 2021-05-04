@@ -1,4 +1,9 @@
 
+/* .email-app{
+    display: flex;
+    width: 100%;
+} */
+
 .email-list{
     display: flex;
     flex-direction: column;
@@ -17,4 +22,13 @@
 }
 .mail-preview-body{
     color: rgb(95, 95, 95);
+}
+
+
+.star-on{
+    color: goldenrod;
+}
+
+.read-on{
+    background-color: rgba(255, 255, 255, 0.432);
 }
