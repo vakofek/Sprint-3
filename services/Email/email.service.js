@@ -161,7 +161,6 @@ function removeReview(reviewId, bookId) {
 }
 
 function addMail(info) {
-    debugger
     const { subject, to, body } = info
     var mail = {
         origin: {
