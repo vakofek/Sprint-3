@@ -3,20 +3,38 @@ import { NoteCardActions } from '../../cmps/Keep/NoteCardActions.jsx'
 
 export class NoteTextPreview extends React.Component {
     state = {
-        note: null
+        note: null,
+        noteTxt: ''
     }
 
     componentDidMount() {
         this.setState({ note: this.props.note })
     }
 
+    handleChange = (ev) => {
+        ev.preventDefault()
+        const inputValue = ev.target.value
+        this.setState({ note: { ...this.state.note, info: { ...this.state.note.info, txt: inputValue } } })
+    }
+
+
+
     render() {
-        const { note, onTogglePinned, onRemoveNote } = this.props
+        if (!this.state.note) return <div>loading...</div>
+        const { note, onTogglePinned, onToggleEditMode, onRemoveNote, onSaveEdit } = this.props
+        const { isEditMode, info } = this.state.note
 
         return (
             <div className="note-card note-text-card">
-                <p>{note.info.txt}</p>
-                <NoteCardActions onRemoveNote={onRemoveNote} onTogglePinned={onTogglePinned} note={note} />
+                {!isEditMode && <p onClick={() => { onToggleEditMode(this.state.note) }}>{info.txt}</p>}
+                {isEditMode && <form onSubmit={(ev) => { 
+                    ev.preventDefault()
+                    onSaveEdit(this.state.note)
+                     }}>
+                    <textarea value={info.txt} onChange={this.handleChange} > </textarea>
+                    <button>Save</button>
+                </form>}
+                <NoteCardActions onToggleEditMode={onToggleEditMode} onRemoveNote={onRemoveNote} onTogglePinned={onTogglePinned} note={note} />
             </div>
         )
     }

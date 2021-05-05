@@ -57,6 +57,7 @@
 .note-card-btn-container > *{
    background-color: transparent;
    border: none;
+   cursor: pointer;
 }
 
 
@@ -65,3 +66,10 @@
     color: rgb(206, 0, 0);
 }
 
+.btn-pin:hover{
+    color: rgb(206, 0, 0);
+}
+
+.todo-done{
+    text-decoration: line-through;
+}

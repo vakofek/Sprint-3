@@ -8,7 +8,10 @@ export const keepService = {
     addNote,
     removeNote,
     toggleIsPinned,
+    toggleIsEditMode,
     searchNote,
+    updateNote,
+    toggleTodo
 }
 
 var gNotes = []
@@ -21,7 +24,7 @@ function query(filterBy, sortBy) {
         else {
             var filteredMails = filterMails(filterBy)
             var sortedMailes = sortMailes(filteredMails, sortBy)
-            return Promise.resolve( _sortByPinned(sortedMailes))
+            return Promise.resolve(_sortByPinned(sortedMailes))
         }
     }
     return Promise.resolve(_sortByPinned(gNotes))
@@ -44,10 +47,38 @@ function toggleIsPinned(noteId) {
     )
 }
 
+function toggleIsEditMode(noteId) {
+    return Promise.resolve(
+        getNoteById(noteId)
+            .then((note) => {
+                note.isEditMode = !note.isEditMode
+                return note
+            })
+    )
+}
+
+function toggleTodo(todoIdx, note) {
+    var noteIdx = getNoteIdxById(note.id)
+    var todo = note.info.todos[todoIdx]
+    todo = { txt: todo.txt, doneAt: (!todo.doneAt) ? Date.now() : null }
+    note.info.todos.splice(todoIdx, 1, todo)
+    gNotes.splice(noteIdx, 1, note)
+    _saveNotesToStorage()
+    return Promise.resolve()
+}
+
 function removeNote(noteId) {
     var noteIdx = getNoteIdxById(noteId)
     gNotes.splice(noteIdx, 1)
-    _saveMailsToStorage()
+    _saveNotesToStorage()
+    return Promise.resolve()
+}
+
+function updateNote(note) {
+    var noteIdx = getNoteIdxById(note.id)
+    gNotes.splice(noteIdx, 1, note)
+    if (note.type !== 'list') toggleIsEditMode(note.id)
+    _saveNotesToStorage()
     return Promise.resolve()
 }
 
@@ -69,11 +100,12 @@ function addNote(txt, type) {
         id: utilService.makeId(),
         type: type,
         isPinned: false,
-        style: { backgroundColor: '#00d' }
+        style: { backgroundColor: '#00d' },
+        isEditMode: false
     }
     note.info = _setInfoByType(type, txt)
     gNotes.unshift(note);
-    _saveMailsToStorage();
+    _saveNotesToStorage();
 }
 
 function _setInfoByType(type, txt) {
@@ -82,10 +114,11 @@ function _setInfoByType(type, txt) {
             return { txt }
         case 'list':
             var todosTxt = txt.split(',')
+            console.log(todosTxt);
             return {
                 lable: utilService.makeLorem(10),
                 todos: todosTxt.map((todo) => {
-                    return { txt: todoTxt, doneAt: null }
+                    return { txt: todo, doneAt: null }
                 })
             }
         case 'sound' || 'video' || 'img':
@@ -98,11 +131,12 @@ function _createNote() {
         id: utilService.makeId(),
         type: _getRandomType(),
         isPinned: Math.random() > 0.8,
-        style: { backgroundColor: '#00d' }
+        style: { backgroundColor: '#00d' },
+        isEditMode: false
     }
     note.info = _getInfoByType(note.type)
     gNotes.unshift(note)
-    _saveMailsToStorage()
+    _saveNotesToStorage()
 }
 
 function _getInfoByType(type) {
@@ -152,7 +186,7 @@ function _getSearchNote(note, searchTxt) {
 }
 
 function _createNotes() {
-    gNotes = _loadMailsFromStorage()
+    gNotes = _loadNotesFromStorage()
     if (!gNotes || gNotes.length === 0) {
         gNotes = []
         for (var i = 0; i < 10; i++) {
@@ -161,11 +195,11 @@ function _createNotes() {
     }
 }
 
-function _saveMailsToStorage() {
+function _saveNotesToStorage() {
     storageService.saveToStorage(STORAGE_KEY, gNotes)
 }
 
-function _loadMailsFromStorage() {
+function _loadNotesFromStorage() {
     return storageService.loadFromStorage(STORAGE_KEY)
 }
 

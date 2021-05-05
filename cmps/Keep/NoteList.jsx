@@ -39,12 +39,28 @@ export class NoteList extends React.Component {
             })
     }
 
-    onRemoveNote=(note)=>{
-        keepService.removeNote(note.id)
-        .then((note) => {
-            this.loadNotes()
-        })
+    onToggleEditMode = (note) => {
+        keepService.toggleIsEditMode(note.id)
+            .then((note) => {
+                this.loadNotes()
+            })
     }
+
+    onRemoveNote = (note) => {
+        keepService.removeNote(note.id)
+            .then((note) => {
+                this.loadNotes()
+            })
+    }
+
+    onSaveEdit = (note) => {
+        keepService.updateNote(note)
+            .then((note) => {
+                this.loadNotes()
+            })
+    }
+
+
 
 
     render() {
@@ -72,7 +88,7 @@ export class NoteList extends React.Component {
             <section className="note-list">
 
                 { notes.map((note) => {
-                    return <DynamicCmp key={note.id} note={note} loadNotes={this.loadNotes} onTogglePinned={this.onTogglePinned} onRemoveNote={this.onRemoveNote} />
+                    return <DynamicCmp key={note.id} note={note} loadNotes={this.loadNotes} onTogglePinned={this.onTogglePinned} onRemoveNote={this.onRemoveNote} onToggleEditMode={this.onToggleEditMode} onSaveEdit={this.onSaveEdit} />
                 })}
 
 
