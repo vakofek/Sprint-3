@@ -3,20 +3,26 @@ import { emailService } from '../../services/Email/email.service.js'
 import { EmailPreview } from '../../cmps/Email/EmailPreview.jsx'
 import { SearchMail } from '../../cmps/Email/SearchMail.jsx'
 import { Sort } from '../../cmps/Email/Sort.jsx'
-// import { SortMail } from '../../cmps/Email/SortMail.jsx'
+
 
 export class EmailList extends React.Component {
 
     state = {
         filterBy: 'received',
+        sortBy: null,
         mails: null
     }
 
     removeFilterEvent;
+    removeSortEvent;
+
 
     componentDidMount() {
         this.removeFilterEvent = eventBusService.on('mail-set-filter', (filterBy) => {
             this.setState({ filterBy }, () => { this.loadMails() });
+        })
+        this.removeSortEvent = eventBusService.on('mail-set-sort', (sortBy) => {
+            this.setState({ sortBy }, () => { this.loadMails() });
         })
 
         this.loadMails()
@@ -24,13 +30,15 @@ export class EmailList extends React.Component {
 
     componentWillUnmount() {
         this.removeFilterEvent()
+        this.removeSortEvent()
     }
-    updateMails = (mails) => {
-        this.setState({ mails }, this.loadMails())
+    onSortBy = (sortBy) => {
+        console.log('sort by in list', sortBy);
+        this.setState({ sortBy }, () => this.loadMails())
     }
 
     loadMails = () => {
-        emailService.query(this.state.filterBy)
+        emailService.query(this.state.filterBy, this.state.sortBy)
             .then((mails) => {
                 this.setState({ mails })
             })
@@ -50,7 +58,7 @@ export class EmailList extends React.Component {
             <section className="email-list">
                 <div className="filter-search-container">
                     <SearchMail OnSearchMail={this.OnSearchMail} loadMails={this.loadMails} />
-                    <Sort updateMails={this.updateMails} />
+                    <Sort onSortBy={this.onSortBy} />
                 </div>
                 { mails.map((mail) => {
                     return <EmailPreview key={mail.mailId} mail={mail} loadMails={this.loadMails} />

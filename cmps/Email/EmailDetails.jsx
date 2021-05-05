@@ -1,8 +1,6 @@
 
 import { emailService } from '../../services/Email/email.service.js'
 import { MailAction } from '../../cmps/Email/MailAction.jsx'
-// import { ReviewAdd } from '../../cmps/Book/ReBookviewAdd.jsx'
-// import { UsersReviews } from '../../cmps/Book/usersReviews.jsx'
 
 export class EmailDetails extends React.Component {
 

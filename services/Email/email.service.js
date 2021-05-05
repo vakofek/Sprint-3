@@ -20,11 +20,47 @@ var gMails = []
 const STORAGE_KEY = 'mails'
 _createMails()
 
-function query(filterBy) {
+function query(filterBy, sortBy) {
     if (filterBy) {
-        return Promise.resolve(filterMails(filterBy))
+        if (!sortBy) return Promise.resolve(filterMails(filterBy))
+        else {
+            var filteredMails = filterMails(filterBy)
+            var sortedMailes = sortMailes(filteredMails, sortBy)
+            return Promise.resolve(sortedMailes)
+        }
     }
     return Promise.resolve(gMails)
+}
+
+function sortMailes(mailes, sortBy) {
+    var sortedMailes;
+    if (sortBy === 'byDate') {
+        sortedMailes = _sortByDate(mailes)
+    }
+    else sortedMailes = _sortBySubject(mailes)
+    return sortedMailes;
+}
+
+function _sortByDate(mailes) {
+    var sortedMailes = mailes.sort(function (mailA, mailB) {
+        return mailA.sentAt - mailB.sentAt;
+    });
+    return sortedMailes;
+}
+
+function _sortBySubject(mailes) {
+    var sortedMailes = mailes.sort(function (a, b) {
+        var mailA = a.subject.toUpperCase(); 
+        var mailB = b.subject.toUpperCase();
+        if (mailA < mailB) {
+            return -1;
+        }
+        if (mailA > mailB) {
+            return 1;
+        }
+        return 0;
+    });
+    return sortedMailes;
 }
 
 function filterMails(filterBy) {
@@ -91,43 +127,6 @@ function _filterByKey(key) {
     })
 }
 
-function sortBy(sortType, sortDir) {
-    // debugger
-    if (sortType === 'date') {
-        var mails= gMails.sort((a, b) => {
-            if (sortDir === 'down'){
-                return a.sentAt - b.sentAt} 
-            return b.sentAt - a.sentAt
-        })
-    }
-    else {
-        if (sortDir === 'down') return (
-            items.sort(function (a, b) {
-                var mailA = a.subject.toUpperCase();
-                var mailB = b.subject.toUpperCase();
-                if (mailA < mailB) {
-                    return -1;
-                }
-                if (mailA > mailB) {
-                    return 1;
-                }
-                return 0;
-            }));
-        else return (items.sort(function (a, b) {
-            var mailA = a.subject.toUpperCase();
-            var mailB = b.subject.toUpperCase();
-            if (mailA > mailB) {
-                return -1;
-            }
-            if (mailA < mailB) {
-                return 1;
-            }
-            return 0;
-        }))
-    }
-    console.log( mails);
-}
-
 function getMailById(mailId) {
     var currMail = gMails.find((mail) => {
         return mail.mailId === mailId
@@ -163,11 +162,12 @@ function removeReview(reviewId, bookId) {
 }
 
 function addMail(info) {
+    debugger
     const { subject, to, body } = info
     var mail = {
         origin: {
             to: { mail: to, name: utilService.makeLorem(2) },
-            from: { mail: 'user@gmail.com', name: 'user' }
+            from: { mail: 'App-Sus@gmail.com', name: 'AppSus' }
         },
         mailId: utilService.makeId(),
         subject: subject,
@@ -191,27 +191,30 @@ function _createMail() {
         sentAt: Date.now(),
         state: Math.random() > 0.5 ? 'sent' : 'received',
         isStarred: Math.random() > 0.5,
-        isDraft: Math.random() > 0.5
+        isDraft: Math.random() > 0.5,
+        name: utilService.makeName()
     }
-    mail.origin = _getOrigin(mail.state);
+
+    mail.origin = _getOrigin(mail.state, mail.name);
     gMails.unshift(mail)
     _saveMailsToStorage()
 }
 
-function _getOrigin(state) {
+function _getOrigin(state, name) {
     switch (state) {
         case 'sent':
             return {
-                to: { mail: `${utilService.makeLorem(1)}@gamil.com`, name: utilService.makeLorem(2) },
-                from: { mail: 'user@gmail.com', name: 'user' }
+                to: { mail: `${name}${utilService.CreateEmailUrl(name)}`, name },
+                from: { mail: 'App-Sus@gmail.com', name: 'AppSus' }
             }
         case 'received':
             return {
-                to: { mail: 'user@gmail.com', name: 'user' },
-                from: { mail: `${utilService.makeLorem(1)}@gamil.com`, name: utilService.makeLorem(2) }
+                to: { mail: 'App-Sus@gmail.com', name: 'AppSus' },
+                from: { mail: `${name}${utilService.CreateEmailUrl(name)}`, name }
             }
     }
 }
+
 
 function searchMail(searchTxt) {
     var mails = gMails.filter((mail) => {

@@ -1,7 +1,11 @@
+
+
 export const utilService = {
     makeId,
     makeLorem,
-    getRandomIntInclusive
+    getRandomIntInclusive,
+    makeName,
+    CreateEmailUrl
 }
 
 function makeId(length = 6) {
@@ -28,5 +32,15 @@ function makeLorem(size = 100) {
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function makeName() {
+    const names = ["Emily", "Hannah", "Madison", "Ashley", "Sarah", "Alexis", "Samantha", "Jessica", "Elizabeth", "Taylor", "Lauren", "Alyssa", "Kayla", "Abigail", "Brianna", "Olivia", "Emma", "Megan", "Grace", "Victoria", "Rachel", "Anna", "Sydney", "Destiny", "Morgan", "Jennifer", "Jasmine", "Haley", "Julia", "Kaitlyn", "Nicole", "Amanda", "Katherine", "Natalie", "Hailey", "Alexandra", "Savannah", "Chloe", "Rebecca", "Stephanie", "Maria", "Sophia", "Mackenzie", "Allison", "Isabella", "Amber", "Mary", "Danielle", "Gabrielle", "Jordan", "Brooke", "Michelle", "Sierra", "Katelyn", "Andrea"]
+    return names[getRandomIntInclusive(0, names.length - 1)]
+}
+
+function CreateEmailUrl() {
+    const emailUrls = ['@gmail.com', '@walla.com', '@gov.co.il', '@yahoo.com', '@net.com', '@aero.com', '@biz.com', '@info.com']
+    return name + emailUrls[getRandomIntInclusive(0, emailUrls.length - 1)]
 }

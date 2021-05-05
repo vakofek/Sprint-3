@@ -16,7 +16,7 @@ export class MailAction extends React.Component {
 
     componentDidMount() {
         const { mail, action } = this.props
-        this.setState({ mail: { ...this.state.mail, to: mail.origin.from, subject: mail.subject } })
+        this.setState({ mail: { ...this.state.mail, to: mail.origin.from, subject: `RE:  ${mail.subject}` } })
         if (action === 'forward') {
             this.setState({ mail: { ...this.state.mail, body: mail.body } })
         }
