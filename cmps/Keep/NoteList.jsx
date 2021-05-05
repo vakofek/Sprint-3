@@ -4,6 +4,7 @@ import { NoteListPreview } from '../../cmps/Keep/NoteListPreview.jsx'
 import { NoteImgPreview } from '../../cmps/Keep/NoteImgPreview.jsx'
 import { NoteSoundPreview } from '../../cmps/Keep/NoteSoundPreview.jsx'
 import { NoteVideoPreview } from '../../cmps/Keep/NoteVideoPreview.jsx'
+import { eventBusService } from '../../services/event-bus-service.js'
 export class NoteList extends React.Component {
 
     state = {
@@ -12,8 +13,16 @@ export class NoteList extends React.Component {
         sortBy: null
     }
 
+
+    removeReloadEvent;
+
     componentDidMount() {
+        this.removeReloadEvent = eventBusService.on('update-note-list', this.loadNotes)
         this.loadNotes()
+    }
+
+    componentWillUnmount() {
+        this.removeReloadEvent()
     }
 
     loadNotes = () => {
@@ -23,13 +32,26 @@ export class NoteList extends React.Component {
             })
     }
 
+    onTogglePinned = (note) => {
+        keepService.toggleIsPinned(note.id)
+            .then((note) => {
+                this.loadNotes()
+            })
+    }
+
+    onRemoveNote=(note)=>{
+        keepService.removeNote(note.id)
+        .then((note) => {
+            this.loadNotes()
+        })
+    }
+
+
     render() {
 
         const DynamicCmp = (props) => {
-            console.log(props);
             switch (props.note.type) {
                 case 'text':
-                    console.log('הגענו לטקסט');
                     return <NoteTextPreview {...props} />
                 case 'list':
                     return <NoteListPreview {...props} />
@@ -47,16 +69,12 @@ export class NoteList extends React.Component {
         const { notes, sortBy } = this.state
         if (!notes) return <div>Loading...</div>
         return (
-            <section className="note-list-container">
+            <section className="note-list">
 
                 { notes.map((note) => {
-                    return <DynamicCmp key={note.id} note={note} loadNotes={this.loadNotes} />
+                    return <DynamicCmp key={note.id} note={note} loadNotes={this.loadNotes} onTogglePinned={this.onTogglePinned} onRemoveNote={this.onRemoveNote} />
                 })}
 
-
-                {/* { notes.map((note) => {
-                    return <NotePreview key={note.id} mail={mail} loadNotes={this.loadNotes} />
-                })} */}
 
             </section>
         )

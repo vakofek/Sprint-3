@@ -19,13 +19,10 @@ export class KeepApp extends React.Component {
 
     render() {
         return (
-            <main>
-                <Router className="keep-app">
-
+            <main className="keep-app">
+                <Router>
                     <AddNote saveNote={this.saveNote} />
                     <NoteList />
-
-
                 </Router>
             </main>)
 

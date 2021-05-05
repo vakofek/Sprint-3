@@ -1,4 +1,6 @@
 
+import { eventBusService } from '../../services/event-bus-service.js'
+
 export class AddNote extends React.Component {
 
     state = {
@@ -30,7 +32,7 @@ export class AddNote extends React.Component {
 
 
     onChangeNoteType = (type) => {
-        this.setState({ note: { ...this.state.note, noteType: type ,noteTxt:''} })
+        this.setState({ note: { ...this.state.note, noteType: type, noteTxt: '' } })
     }
 
     handleChange = (ev) => {
@@ -43,14 +45,17 @@ export class AddNote extends React.Component {
     onSaveNote = (ev) => {
         ev.preventDefault();
         var txt = ev.target[name = 'noteText'].value
-        this.setState({ note: { ...this.state.note ,noteTxt:''} },
-        ()=>{this.props.saveNote(txt, this.state.note.noteType)})
+        this.setState({ note: { ...this.state.note, noteTxt: '' } },
+            () => { 
+                this.props.saveNote(txt, this.state.note.noteType)
+                eventBusService.emit('update-note-list')
+            })
     }
 
     render() {
         return (
-            <section>
-                <form className="add-note-container" onSubmit={this.onSaveNote}>
+            <section className="add-note-container">
+                <form onSubmit={this.onSaveNote}>
                     <input value={this.state.note.noteTxt} name="noteText" type="text" placeholder={this.getPlaceHolder()} onChange={this.handleChange} />
                 </form>
                 <button onClick={() => { this.onChangeNoteType('text') }}><i className="fas fa-font"></i></button>

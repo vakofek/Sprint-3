@@ -1,0 +1,67 @@
+
+.keep-app{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.add-note-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+    background-color: rgb(206, 206, 206);
+    padding: 5px;
+    
+}
+.add-note-container > *{
+    background-color: transparent;
+    border: none;
+}
+
+.add-note-container button{
+    cursor: pointer;
+}
+
+.add-note-container input{
+    border: none;
+    padding: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.note-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.note-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 25px;
+    background-color: rgb(226, 226, 226);
+    box-shadow: 0 0 4px 1px #00000038;
+
+}
+
+.note-card-btn-container{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.note-card-btn-container > *{
+   background-color: transparent;
+   border: none;
+}
+
+
+
+.pinned-note{
+    color: rgb(206, 0, 0);
+}
+

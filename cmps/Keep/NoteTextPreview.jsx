@@ -1,18 +1,22 @@
 
+import { NoteCardActions } from '../../cmps/Keep/NoteCardActions.jsx'
+
 export class NoteTextPreview extends React.Component {
-    state = {}
+    state = {
+        note: null
+    }
+
+    componentDidMount() {
+        this.setState({ note: this.props.note })
+    }
 
     render() {
-
-        const { note } = this.props
+        const { note, onTogglePinned, onRemoveNote } = this.props
 
         return (
             <div className="note-card note-text-card">
                 <p>{note.info.txt}</p>
-                <div className="note-card-btn-container">
-                    <button><i className="fas fa-thumbtack"></i></button>
-                    <button><i className="fas fa-palette"></i></button>
-                </div>
+                <NoteCardActions onRemoveNote={onRemoveNote} onTogglePinned={onTogglePinned} note={note} />
             </div>
         )
     }

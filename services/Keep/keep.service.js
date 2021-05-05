@@ -17,14 +17,21 @@ _createNotes()
 
 function query(filterBy, sortBy) {
     if (filterBy) {
-        if (!sortBy) return Promise.resolve(filterMails(filterBy))
+        if (!sortBy) return Promise.resolve(_sortByPinned(filterMails(filterBy)))
         else {
             var filteredMails = filterMails(filterBy)
             var sortedMailes = sortMailes(filteredMails, sortBy)
-            return Promise.resolve(sortedMailes)
+            return Promise.resolve( _sortByPinned(sortedMailes))
         }
     }
-    return Promise.resolve(gNotes)
+    return Promise.resolve(_sortByPinned(gNotes))
+}
+
+
+function _sortByPinned(notes) {
+    return notes.sort((noteA, noteB) => {
+        return (noteA.isPinned === noteB.isPinned) ? 0 : noteA.isPinned ? -1 : 1
+    })
 }
 
 function toggleIsPinned(noteId) {
@@ -106,7 +113,7 @@ function _getInfoByType(type) {
             return {
                 lable: utilService.makeLorem(10),
                 todos: [
-                    { txt: utilService.makeLorem(5),doneAt: (Math.random() > 0.7) ? Date.now() : null },
+                    { txt: utilService.makeLorem(5), doneAt: (Math.random() > 0.7) ? Date.now() : null },
                     { txt: utilService.makeLorem(5), doneAt: (Math.random() > 0.7) ? Date.now() : null },
                     { txt: utilService.makeLorem(5), doneAt: (Math.random() > 0.7) ? Date.now() : null },
                     { txt: utilService.makeLorem(5), doneAt: (Math.random() > 0.7) ? Date.now() : null }
