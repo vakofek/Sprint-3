@@ -13,7 +13,6 @@ export const emailService = {
     toggleRead,
     getReadStatistics,
     searchMail,
-    sortBy
 }
 
 var gMails = []
@@ -50,7 +49,7 @@ function _sortByDate(mailes) {
 
 function _sortBySubject(mailes) {
     var sortedMailes = mailes.sort(function (a, b) {
-        var mailA = a.subject.toUpperCase(); 
+        var mailA = a.subject.toUpperCase();
         var mailB = b.subject.toUpperCase();
         if (mailA < mailB) {
             return -1;

@@ -1,21 +1,33 @@
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM
+import { keepService } from '../../services/Keep/keep.service.js'
+import { NoteList } from '../../cmps/Keep/NoteList.jsx'
+import { AddNote } from '../../cmps/Keep/AddNote.jsx'
 
 
 
 
+export class KeepApp extends React.Component {
 
-export function KeepApp() {
-    return (
-        <Router className="keep-app">
-           <main>
-                <h1>keep</h1>
-            </main>
-           
-            {/* <Switch>
-                <Route component={AddBook} path="/add-book" />
-                <Route component={BookDetails} path="/book/:bookId" />
-                <Route component={BookGallery} path="/book" />
-            </Switch> */}
-        </Router>)
+    state = {}
+
+
+    saveNote = (txt, noteType) => {
+        console.log('save', txt, noteType);
+        keepService.addNote(txt, noteType)
+    }
+
+    render() {
+        return (
+            <main>
+                <Router className="keep-app">
+
+                    <AddNote saveNote={this.saveNote} />
+                    <NoteList />
+
+
+                </Router>
+            </main>)
+
+    }
 }
