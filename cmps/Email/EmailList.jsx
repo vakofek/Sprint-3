@@ -33,7 +33,6 @@ export class EmailList extends React.Component {
         this.removeSortEvent()
     }
     onSortBy = (sortBy) => {
-        console.log('sort by in list', sortBy);
         this.setState({ sortBy }, () => this.loadMails())
     }
 
@@ -45,7 +44,7 @@ export class EmailList extends React.Component {
     }
 
     OnSearchMail = (searchTxt) => {
-        emailService.searchMail(searchTxt)
+        emailService.searchMail(searchTxt.toUpperCase())
             .then((mails) => {
                 this.setState({ mails })
             })
