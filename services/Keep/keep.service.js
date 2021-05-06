@@ -179,7 +179,7 @@ function _getInfoByType(type) {
 // UPDATE LATER
 function _getRandomType() {
     var types = ['text', 'list', 'img', 'sound', 'video']
-    return types[utilService.getRandomIntInclusive(0, types.length - 1)]
+    return types[utilService.getRandomInt(0, types.length - 1)]
 }
 
 
