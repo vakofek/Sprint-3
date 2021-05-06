@@ -35,7 +35,7 @@ export class AddBook extends React.Component {
                             <div key={book.id} className="search-preview">
                                 <button onClick={() => {
                                     this.onAddBook(book)
-                                    eventBusService.emit('show-user-msg', { txt: 'Book was successfully saved!', type: 'success', bookId: book.id })
+                                    eventBusService.emit('show-user-msg', { txt: 'Book was successfully saved!', type: 'success',app: 'book', bookId: book.id })
                                 }}><i className="far fa-plus-square"></i></button>
                                 <h3>{book.volumeInfo.title}</h3>
                             </div>

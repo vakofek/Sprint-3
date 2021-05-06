@@ -1,5 +1,7 @@
 
-export class SearchMail extends React.Component {
+
+export class SearchNote extends React.Component{
+
     state = {
         searchTxt: ''
     }
@@ -7,15 +9,16 @@ export class SearchMail extends React.Component {
     handleChange = (ev) => {
         ev.preventDefault()
         this.setState({ searchTxt: ev.target.value }, () => {
-            this.props.OnSearchMail(this.state.searchTxt)
+            this.props.OnSearchNote(this.state.searchTxt)
         })
     }
 
     render() {
         return (
-            <div className="">
-                <input type="search" placeholder="Search a mail" onChange={this.handleChange} />
+            <div className="search-note">
+                <input type="search" placeholder="Search a note" onChange={this.handleChange} />
             </div>
         )
     }
+
 }

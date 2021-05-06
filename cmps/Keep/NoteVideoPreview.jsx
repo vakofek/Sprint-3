@@ -23,9 +23,7 @@ export class NoteVideoPreview extends React.Component {
 
     getVideoId = () => {
         var url = this.state.note.info.url;
-        console.log(url);
         var id = url.substring(url.indexOf('?') + 3, url.length)
-        console.log(id);
         return id;
     }
 
@@ -41,7 +39,7 @@ export class NoteVideoPreview extends React.Component {
                     <h1 onClick={() => { onToggleEditMode(this.state.note) }}>{info.title}</h1>
                     <iframe src={`https://www.youtube.com/embed/${this.getVideoId()}`}></iframe>
                 </div>}
-                {isEditMode && <div>
+                {isEditMode && <div className="note-video-card">
                     <form onSubmit={this.onSaveChange}>
                         <input name="title" value={info.title} onChange={this.handleChange} />
                     </form>

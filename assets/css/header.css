@@ -10,6 +10,7 @@ header {
     background-color: rgb(27, 27, 27);
     padding: 0vw 5vw;
     box-shadow: 0 0 8px 1px #00000085;
+    z-index: 5;
 }
 
 @media (min-width: 850px) {

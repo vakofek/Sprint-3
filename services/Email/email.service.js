@@ -216,9 +216,9 @@ function _getOrigin(state, name) {
 
 function searchMail(searchTxt) {
     var mails = gMails.filter((mail) => {
-        return mail.subject.includes(searchTxt) || mail.body.includes(searchTxt)
-            || mail.origin.to.name.includes(searchTxt) || mail.origin.from.name.includes(searchTxt)
-            || mail.origin.to.mail.includes(searchTxt) || mail.origin.from.mail.includes(searchTxt)
+        return mail.subject.toUpperCase().includes(searchTxt) || mail.body.toUpperCase().includes(searchTxt)
+            || mail.origin.to.name.toUpperCase().includes(searchTxt) || mail.origin.from.name.toUpperCase().includes(searchTxt)
+            || mail.origin.to.mail.toUpperCase().includes(searchTxt) || mail.origin.from.mail.toUpperCase().includes(searchTxt)
     })
     if (!mails) return Promise.resolve(gMails)
     return Promise.resolve(mails)

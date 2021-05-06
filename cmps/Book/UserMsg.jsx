@@ -14,6 +14,7 @@ export class UserMsg extends React.Component {
     this.removeEvent = eventBusService.on('show-user-msg', (msg) => {
       this.setState({ msg })
     })
+    
   }
 
   componentWillUnmount() {
@@ -22,19 +23,20 @@ export class UserMsg extends React.Component {
 
   render() {
     if (!this.state.msg) return <span></span>
-    const msgClass = this.state.msg.type || ''
+    const msgClass = this.state.msg.msgType
     return (
       <section className={'user-msg ' + msgClass}>
-        <img src="assets/img/success.png"/>
+        <img src="assets/img/success.png" />
         {this.state.msg.txt}
         <div className="user-msg-btn-container">
-          <button className="secondary-btn" onClick={() => {
+          {this.state.msg.app === 'book' && <button className="secondary-btn" onClick={() => {
             this.setState({ msg: null })
-          }}>Close</button>
+          }}>Close</button>}
           <button className=" success-btn" onClick={() => {
-              this.setState({ msg: null })
-            }}>
-            <Link to={`/book/${this.state.msg.bookId}`} >Check it Out</Link>
+            this.setState({ msg: null })
+          }}>
+            {this.state.msg.app === 'book' &&<Link to={`/book/${this.state.msg.bookId}`} >Check it Out</Link>}
+            {this.state.msg.app === 'mail' &&<Link to={`/mail`} >Back to inbox</Link>}
           </button>
         </div>
       </section>
