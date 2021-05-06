@@ -54,15 +54,16 @@ export class EmailList extends React.Component {
         const { mails, filterBy } = this.state
         if (!mails) return <div>Loading...</div>
         return (
-            <section className="email-list">
+            <section className="email-list-container">
                 <div className="filter-search-container">
                     <SearchMail OnSearchMail={this.OnSearchMail} loadMails={this.loadMails} />
                     <Sort onSortBy={this.onSortBy} />
                 </div>
+                <div className="email-list">
                 { mails.map((mail) => {
                     return <EmailPreview key={mail.mailId} mail={mail} loadMails={this.loadMails} />
                 })}
-
+                </div>
             </section>
         )
     }

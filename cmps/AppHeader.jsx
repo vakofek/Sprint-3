@@ -5,7 +5,7 @@ export class AppHeader extends React.Component {
     state = {
         currPage: {
             pageName: 'App Sus',
-            logoUrl: 'assets/img/book.png',
+            logoUrl: 'assets/img/logo.png',
         }
     }
 

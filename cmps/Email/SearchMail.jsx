@@ -13,7 +13,7 @@ export class SearchMail extends React.Component {
 
     render() {
         return (
-            <div className="">
+            <div className="email-search">
                 <input type="search" placeholder="Search a mail" onChange={this.handleChange} />
             </div>
         )

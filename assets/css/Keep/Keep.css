@@ -85,12 +85,6 @@
     background-position: 98% 50%;
 }
 
-.search-note input {
-    width: 100%;
-    border: none;
-    border-radius: 5px;
-}
-
 .note-list {
     columns: 1;
     column-gap: 2.5vw;
