@@ -1,10 +1,10 @@
 
-
 export const utilService = {
     makeId,
     makeLorem,
     getRandomInt,
     randomDate,
+    getRandomColor
 }
 
 function makeId(length = 6) {
@@ -40,3 +40,7 @@ function randomDate() {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
+function getRandomColor() {
+    var colors = ['red', 'unset', 'blue', 'unset', 'green', 'unset', 'yellow', 'unset', 'unset', 'purple', 'unset', 'pink', 'orange']
+    return colors.splice(getRandomInt(0, 12), 1)
+}
