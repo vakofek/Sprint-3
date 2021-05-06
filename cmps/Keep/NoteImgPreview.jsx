@@ -29,12 +29,12 @@ export class NoteImgPreview extends React.Component {
         const { note, onTogglePinned, onToggleEditMode, onRemoveNote, updateStyle, onSaveEdit } = this.props
         const { info, isEditMode } = this.state.note
         return (
-            <div className={'note-card ' + this.state.note.style.backgroundColor}>
-                {!isEditMode && <div className="note-img-card">
+            <div className={'note-card note-img-card ' + this.state.note.style.backgroundColor}>
+                {!isEditMode && <div>
                     <h1 onClick={() => { onToggleEditMode(this.state.note) }}>{info.title}</h1>
                     <img src={info.url} />
                 </div>}
-                {isEditMode && <div className="note-img-card">
+                {isEditMode && <div>
                     <form onSubmit={this.onSaveChange}>
                         <input name="title" value={info.title} onChange={this.handleChange} />
                     </form>

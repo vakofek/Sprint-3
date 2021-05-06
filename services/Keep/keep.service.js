@@ -108,11 +108,13 @@ function addNote(txt, type) {
         id: utilService.makeId(),
         type: type,
         isPinned: false,
-        style: { backgroundColor: _getRandomColor() },
+        style: { backgroundColor: '#00d' },
         isEditMode: false
     }
     note.info = _setInfoByType(type, txt)
+    console.log(note);
     gNotes.unshift(note);
+    console.log(gNotes);
     _saveNotesToStorage();
 }
 
@@ -122,6 +124,7 @@ function _setInfoByType(type, txt) {
             return { txt }
         case 'list':
             var todosTxt = txt.split(',')
+            console.log(todosTxt);
             return {
                 lable: utilService.makeLorem(10),
                 todos: todosTxt.map((todo) => {
@@ -142,17 +145,12 @@ function _createNote() {
         id: utilService.makeId(),
         type: _getRandomType(),
         isPinned: Math.random() > 0.8,
-        style: { backgroundColor: _getRandomColor() },
+        style: { backgroundColor: '#00d' },
         isEditMode: false
     }
     note.info = _getInfoByType(note.type)
     gNotes.unshift(note)
     _saveNotesToStorage()
-}
-
-function _getRandomColor() {
-    var colors = ['red','unset', 'blue', 'unset', 'green', 'unset', 'yellow', 'unset' , 'unset' , 'purple' , 'unset' , 'pink' , 'orange']
-    return colors.splice(utilService.getRandomIntInclusive(0, 12), 1)
 }
 
 function _getInfoByType(type) {
@@ -181,7 +179,7 @@ function _getInfoByType(type) {
 // UPDATE LATER
 function _getRandomType() {
     var types = ['text', 'list', 'img', 'sound', 'video']
-    return types[utilService.getRandomIntInclusive(0, types.length - 1)]
+    return types[utilService.getRandomInt(0, types.length - 1)]
 }
 
 
@@ -197,34 +195,19 @@ function searchNote(searchTxt) {
 function _getSearchNote(note, searchTxt) {
     switch (note.type) {
         case 'text':
-            return note.info.txt.toUpperCase().includes(searchTxt)
-        case 'sound':
-            return note.info.title.toUpperCase().includes(searchTxt) ||
-                note.info.url.toUpperCase().includes(searchTxt)
-        case 'video':
-            return note.info.title.toUpperCase().includes(searchTxt) ||
-                note.info.url.toUpperCase().includes(searchTxt)
-        case 'img':
-            return note.info.title.toUpperCase().includes(searchTxt) ||
-                note.info.url.toUpperCase().includes(searchTxt)
+            return note.info.txt.includes(searchTxt)
+        case 'sound' || 'video' || 'img':
+            return note.info.title.includes(searchTxt)
         case 'list':
-            return note.info.lable.toUpperCase().includes(searchTxt) || _searchInList(note, searchTxt)
+            return note.info.lable.includes(searchTxt)
     }
-}
-
-function _searchInList(note, searchTxt) {
-    var x = note.info.todos.filter((todo) => {
-        return todo.txt.toUpperCase().includes(searchTxt)
-    })
-    if (x.length === 0 || !x) return false
-    return true
 }
 
 function _createNotes() {
     gNotes = _loadNotesFromStorage()
     if (!gNotes || gNotes.length === 0) {
         gNotes = []
-        for (var i = 0; i < 30; i++) {
+        for (var i = 0; i < 10; i++) {
             _createNote()
         }
     }
@@ -237,7 +220,6 @@ function _saveNotesToStorage() {
 function _loadNotesFromStorage() {
     return storageService.loadFromStorage(STORAGE_KEY)
 }
-
 
 
 

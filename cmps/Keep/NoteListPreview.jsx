@@ -38,7 +38,8 @@ export class NoteListPreview extends React.Component {
     }
 
     saveLable = () => {
-        this.props.onSaveEdit(this.state.note, true)
+        console.log('hi');
+        this.props.onSaveEdit(this.state.note , true)
     }
 
     render() {
@@ -54,22 +55,18 @@ export class NoteListPreview extends React.Component {
                     <input name="todo-label" value={info.lable} onChange={this.handleChange} />
                 </form>}
 
-                <div>
+                <ul>
                     {info.todos.map((todo, idx) => {
-                        return (
-                            <div key={idx + note.id}>
-                                <span onClick={() => { this.onToggleTodo(idx) }} className={this.getTodoClass(todo)} >{todo.txt}</span>
-                                <hr />
-                            </div>
-                        )
+                        return <li key={idx + note.id} onClick={() => { this.onToggleTodo(idx) }} className={this.getTodoClass(todo)} >{todo.txt}</li>
                     })}
-                </div>
+                </ul>
+                { !note.isEditMode && <NoteCardActions updateStyle={updateStyle} onToggleEditMode={onToggleEditMode} onRemoveNote={onRemoveNote} onTogglePinned={onTogglePinned} note={note} />}
                 {note.isEditMode && <div>
                     <form onSubmit={this.saveTodo} >
-                        <input name="todo-list" onChange={this.handleChange} placeholder="Add new todo" />
+                        <input name="todo-list" onChange={this.handleChange} />
                     </form>
+                    <button onClick={() => { onToggleEditMode(this.state.note) }}><i className="far fa-window-close"></i></button>
                 </div>}
-                <NoteCardActions updateStyle={updateStyle} onToggleEditMode={onToggleEditMode} onRemoveNote={onRemoveNote} onTogglePinned={onTogglePinned} note={note} />
             </div>
         )
     }

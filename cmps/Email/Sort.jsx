@@ -10,6 +10,7 @@ export class Sort extends React.Component {
     sortBy = (sortBy) => {
         if (sortBy === 'byDate') this.setState({ sortDateIconState: !this.state.sortDateIconState })
         else this.setState({ sortSubjectIconState: !this.state.sortSubjectIconState })
+        console.log(sortBy);
         this.props.onSortBy(sortBy)
     }
 

@@ -1,6 +1,6 @@
 
 export class SearchMail extends React.Component {
-    state = {
+    static = {
         searchTxt: ''
     }
 

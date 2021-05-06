@@ -3,9 +3,8 @@
 export const utilService = {
     makeId,
     makeLorem,
-    getRandomIntInclusive,
-    makeName,
-    CreateEmailUrl
+    getRandomInt,
+    randomDate,
 }
 
 function makeId(length = 6) {
@@ -29,18 +28,15 @@ function makeLorem(size = 100) {
     return txt;
 }
 
-function getRandomIntInclusive(min, max) {
+function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function makeName() {
-    const names = ["Emily", "Hannah", "Madison", "Ashley", "Sarah", "Alexis", "Samantha", "Jessica", "Elizabeth", "Taylor", "Lauren", "Alyssa", "Kayla", "Abigail", "Brianna", "Olivia", "Emma", "Megan", "Grace", "Victoria", "Rachel", "Anna", "Sydney", "Destiny", "Morgan", "Jennifer", "Jasmine", "Haley", "Julia", "Kaitlyn", "Nicole", "Amanda", "Katherine", "Natalie", "Hailey", "Alexandra", "Savannah", "Chloe", "Rebecca", "Stephanie", "Maria", "Sophia", "Mackenzie", "Allison", "Isabella", "Amber", "Mary", "Danielle", "Gabrielle", "Jordan", "Brooke", "Michelle", "Sierra", "Katelyn", "Andrea"]
-    return names[getRandomIntInclusive(0, names.length - 1)]
+function randomDate() {
+    var start = new Date(getRandomInt(2000, 2021), 0, 1);
+    var end = new Date();
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
-function CreateEmailUrl() {
-    const emailUrls = ['@gmail.com', '@walla.com', '@gov.co.il', '@yahoo.com', '@net.com', '@aero.com', '@biz.com', '@info.com']
-    return name + emailUrls[getRandomIntInclusive(0, emailUrls.length - 1)]
-}
