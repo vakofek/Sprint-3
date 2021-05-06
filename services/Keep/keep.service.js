@@ -11,7 +11,8 @@ export const keepService = {
     toggleIsEditMode,
     searchNote,
     updateNote,
-    toggleTodo
+    toggleTodo,
+    updateNoteStyle
 }
 
 var gNotes = []
@@ -74,10 +75,17 @@ function removeNote(noteId) {
     return Promise.resolve()
 }
 
-function updateNote(note) {
+function updateNote(note, isLable) {
     var noteIdx = getNoteIdxById(note.id)
     gNotes.splice(noteIdx, 1, note)
-    if (note.type !== 'list') toggleIsEditMode(note.id)
+    if (note.type !== 'list' || isLable) toggleIsEditMode(note.id)
+    _saveNotesToStorage()
+    return Promise.resolve()
+}
+
+function updateNoteStyle(color, noteId) {
+    var noteIdx = getNoteIdxById(noteId)
+    gNotes[noteIdx].style = { backgroundColor: color }
     _saveNotesToStorage()
     return Promise.resolve()
 }
@@ -121,7 +129,9 @@ function _setInfoByType(type, txt) {
                     return { txt: todo, doneAt: null }
                 })
             }
-        case 'sound' || 'video' || 'img':
+        case 'img':
+            return { title: 'New image', url: txt }
+        case 'sound' || 'video':
             return { title: 'file title', url: txt }
     }
 }
@@ -153,15 +163,17 @@ function _getInfoByType(type) {
                     { txt: utilService.makeLorem(5), doneAt: (Math.random() > 0.7) ? Date.now() : null }
                 ]
             }
-        case 'sound' || 'video' || 'img':
+        case 'img':
+            return { title: 'New image', url: "assets/img/note-imgs/1.jpg" }
+        case 'sound' || 'video':
             return { title: utilService.makeLorem(10), url: 'img-src' }
     }
 }
 
 // UPDATE LATER
 function _getRandomType() {
-    var types = ['text', 'list', 'sound', 'video', 'img']
-    return types[utilService.getRandomIntInclusive(0, 1)]
+    var types = ['text', 'list', 'img', 'sound', 'video']
+    return types[utilService.getRandomIntInclusive(0, 2)]
 }
 
 

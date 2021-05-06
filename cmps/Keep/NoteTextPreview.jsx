@@ -19,13 +19,14 @@ export class NoteTextPreview extends React.Component {
 
 
 
+
     render() {
         if (!this.state.note) return <div>loading...</div>
-        const { note, onTogglePinned, onToggleEditMode, onRemoveNote, onSaveEdit } = this.props
+        const { note, onTogglePinned, onToggleEditMode, onRemoveNote, onSaveEdit ,updateStyle} = this.props
         const { isEditMode, info } = this.state.note
 
         return (
-            <div className="note-card note-text-card">
+            <div className={'note-card note-text-card ' + this.state.note.style.backgroundColor}>
                 {!isEditMode && <p onClick={() => { onToggleEditMode(this.state.note) }}>{info.txt}</p>}
                 {isEditMode && <form onSubmit={(ev) => { 
                     ev.preventDefault()
@@ -34,7 +35,7 @@ export class NoteTextPreview extends React.Component {
                     <textarea value={info.txt} onChange={this.handleChange} > </textarea>
                     <button>Save</button>
                 </form>}
-                <NoteCardActions onToggleEditMode={onToggleEditMode} onRemoveNote={onRemoveNote} onTogglePinned={onTogglePinned} note={note} />
+                <NoteCardActions updateStyle={updateStyle} onToggleEditMode={onToggleEditMode} onRemoveNote={onRemoveNote} onTogglePinned={onTogglePinned} note={note} />
             </div>
         )
     }

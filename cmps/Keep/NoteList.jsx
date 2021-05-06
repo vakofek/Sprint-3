@@ -34,33 +34,39 @@ export class NoteList extends React.Component {
 
     onTogglePinned = (note) => {
         keepService.toggleIsPinned(note.id)
-            .then((note) => {
+            .then(() => {
                 this.loadNotes()
             })
     }
 
     onToggleEditMode = (note) => {
         keepService.toggleIsEditMode(note.id)
-            .then((note) => {
+            .then(() => {
                 this.loadNotes()
             })
     }
 
     onRemoveNote = (note) => {
         keepService.removeNote(note.id)
-            .then((note) => {
+            .then(() => {
                 this.loadNotes()
             })
     }
 
-    onSaveEdit = (note) => {
-        keepService.updateNote(note)
-            .then((note) => {
+    onSaveEdit = (note, isLable = false) => {
+        console.log(note);
+        keepService.updateNote(note, isLable)
+            .then(() => {
                 this.loadNotes()
             })
     }
 
-
+    updateStyle = (color, id) => {
+        keepService.updateNoteStyle(color, id)
+            .then(() => {
+                this.loadNotes()
+            })
+    }
 
 
     render() {
@@ -88,7 +94,7 @@ export class NoteList extends React.Component {
             <section className="note-list">
 
                 { notes.map((note) => {
-                    return <DynamicCmp key={note.id} note={note} loadNotes={this.loadNotes} onTogglePinned={this.onTogglePinned} onRemoveNote={this.onRemoveNote} onToggleEditMode={this.onToggleEditMode} onSaveEdit={this.onSaveEdit} />
+                    return <DynamicCmp key={note.id} updateStyle={this.updateStyle} note={note} loadNotes={this.loadNotes} onTogglePinned={this.onTogglePinned} onRemoveNote={this.onRemoveNote} onToggleEditMode={this.onToggleEditMode} onSaveEdit={this.onSaveEdit} />
                 })}
 
 

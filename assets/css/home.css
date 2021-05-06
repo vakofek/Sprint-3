@@ -9,18 +9,17 @@
 
 .hero-txt{
     position: absolute;
-    font-size: 4rem;
-    top: 30%;
-    left: 20%;
+    font-size: 3rem;
+    top: 40%;
+    left: 30%;
     color: rgb(255, 255, 255);
-    text-shadow: 0 0 0 #fff;
+    text-shadow: 0 0 4px #000000;
 }
 
 .hero-txt span{
     font-size: 4rem;
     font-family: inherit;
     color: #04b0d8;
-    text-shadow: 0 0 0 #04b0d8;
 }
 
 .hero-btn{

@@ -14,8 +14,10 @@ export class NoteListPreview extends React.Component {
 
     handleChange = (ev) => {
         ev.preventDefault()
+        const inputName = ev.target.name
         const inputValue = ev.target.value
-        this.setState({ todo: { txt: inputValue, doneAt: null } })
+        if (inputName === 'todo-label') this.setState({ note: { ...this.state.note, info: { ...this.state.note.info, lable: inputValue } } })
+        else this.setState({ todo: { txt: inputValue, doneAt: null } })
     }
 
     onToggleTodo = (todoIdx) => {
@@ -35,21 +37,33 @@ export class NoteListPreview extends React.Component {
         this.props.onSaveEdit(newNote)
     }
 
+    saveLable = () => {
+        console.log('hi');
+        this.props.onSaveEdit(this.state.note , true)
+    }
+
     render() {
-        const { note, onTogglePinned, onRemoveNote, onToggleEditMode } = this.props
-        const { info } = note
+        if (!this.state.note) return <div>loading...</div>
+        const { note, onTogglePinned, onRemoveNote, onToggleEditMode, updateStyle } = this.props
+        const { info, isEditMode } = (!this.state.note) ? note : this.state.note
+
+
         return (
-            <div className="note-card note-list-card">
-                <h3>{info.lable}</h3>
+            <div className={'note-card note-list-card ' + this.state.note.style.backgroundColor}>
+                {!isEditMode && <h3 onClick={() => { onToggleEditMode(this.state.note) }}>{info.lable}</h3>}
+                {isEditMode && <form onSubmit={this.saveLable}>
+                    <input name="todo-label" value={info.lable} onChange={this.handleChange} />
+                </form>}
+
                 <ul>
                     {info.todos.map((todo, idx) => {
                         return <li key={idx + note.id} onClick={() => { this.onToggleTodo(idx) }} className={this.getTodoClass(todo)} >{todo.txt}</li>
                     })}
                 </ul>
-                { !note.isEditMode && <NoteCardActions onToggleEditMode={onToggleEditMode} onRemoveNote={onRemoveNote} onTogglePinned={onTogglePinned} note={note} />}
+                { !note.isEditMode && <NoteCardActions updateStyle={updateStyle} onToggleEditMode={onToggleEditMode} onRemoveNote={onRemoveNote} onTogglePinned={onTogglePinned} note={note} />}
                 {note.isEditMode && <div>
                     <form onSubmit={this.saveTodo} >
-                        <input onChange={this.handleChange} />
+                        <input name="todo-list" onChange={this.handleChange} />
                     </form>
                     <button onClick={() => { onToggleEditMode(this.state.note) }}><i className="far fa-window-close"></i></button>
                 </div>}
