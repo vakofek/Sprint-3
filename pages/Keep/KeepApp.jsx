@@ -13,7 +13,6 @@ export class KeepApp extends React.Component {
 
 
     saveNote = (txt, noteType) => {
-        console.log('save', txt, noteType);
         keepService.addNote(txt, noteType)
     }
 

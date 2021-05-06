@@ -5,6 +5,7 @@ import { NoteImgPreview } from '../../cmps/Keep/NoteImgPreview.jsx'
 import { NoteSoundPreview } from '../../cmps/Keep/NoteSoundPreview.jsx'
 import { NoteVideoPreview } from '../../cmps/Keep/NoteVideoPreview.jsx'
 import { eventBusService } from '../../services/event-bus-service.js'
+import { SearchNote } from '../../cmps/Keep/SearchNote.jsx'
 export class NoteList extends React.Component {
 
     state = {
@@ -54,7 +55,6 @@ export class NoteList extends React.Component {
     }
 
     onSaveEdit = (note, isLable = false) => {
-        console.log(note);
         keepService.updateNote(note, isLable)
             .then(() => {
                 this.loadNotes()
@@ -65,6 +65,13 @@ export class NoteList extends React.Component {
         keepService.updateNoteStyle(color, id)
             .then(() => {
                 this.loadNotes()
+            })
+    }
+
+    OnSearchNote = (searchTxt) => {
+        keepService.searchNote(searchTxt.toUpperCase())
+            .then((notes) => {
+                this.setState({ notes })
             })
     }
 
@@ -91,11 +98,13 @@ export class NoteList extends React.Component {
         const { notes, sortBy } = this.state
         if (!notes) return <div>Loading...</div>
         return (
-            <section className="note-list">
-
-                { notes.map((note) => {
-                    return <DynamicCmp key={note.id} updateStyle={this.updateStyle} note={note} loadNotes={this.loadNotes} onTogglePinned={this.onTogglePinned} onRemoveNote={this.onRemoveNote} onToggleEditMode={this.onToggleEditMode} onSaveEdit={this.onSaveEdit} />
-                })}
+            <section className="note-gallery">
+                <SearchNote OnSearchNote={this.OnSearchNote} />
+                <div className="note-list">
+                    {notes.map((note) => {
+                        return <DynamicCmp key={note.id} updateStyle={this.updateStyle} note={note} loadNotes={this.loadNotes} onTogglePinned={this.onTogglePinned} onRemoveNote={this.onRemoveNote} onToggleEditMode={this.onToggleEditMode} onSaveEdit={this.onSaveEdit} />
+                    })}
+                </div>
 
 
             </section>

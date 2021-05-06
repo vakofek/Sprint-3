@@ -36,11 +36,13 @@ export class NoteSoundPreview extends React.Component {
 
 
                 </div>}
-                {isEditMode && <div>
+                {isEditMode && <div className="note-sound-card">
                     <form onSubmit={this.onSaveChange}>
                         <input name="title" value={info.title} onChange={this.handleChange} />
                     </form>
-                    <audio src={info.url} />
+                    <audio controls>
+                        <source src={info.url} type="audio/ogg" />
+                    </audio>
                     <form onSubmit={this.onSaveChange}>
                         <input name="url" type="text" onChange={this.handleChange} placeholder='Enter sound URL...' />
                     </form>
