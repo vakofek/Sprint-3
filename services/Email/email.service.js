@@ -43,7 +43,7 @@ function sortMailes(mailes, sortBy) {
 
 function _sortByDate(mailes) {
     var sortedMailes = mailes.sort(function (mailA, mailB) {
-        return mailA.sentAt - mailB.sentAt;
+        return mailB.sentAt - mailA.sentAt;
     });
     return sortedMailes;
 }

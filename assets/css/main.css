@@ -12,6 +12,7 @@
 @import url(../css/Email/Mail-list.css);
 @import url(../css/Email/Mail-details.css);
 @import url(../css/Keep/Keep.css);
+@import url(../css/Email/progress-bar.css);
 
 * {
     box-sizing: border-box;

@@ -1,6 +1,6 @@
-
 import { utilService } from '../util-service.js'
 import { storageService } from '../storage-service.js'
+import { keepData } from '../data/keep.data.js'
 
 export const keepService = {
     query,
@@ -108,7 +108,7 @@ function addNote(txt, type) {
         id: utilService.makeId(),
         type: type,
         isPinned: false,
-        style: { backgroundColor: _getRandomColor() },
+        style: { backgroundColor: utilService.getRandomColor() },
         isEditMode: false
     }
     note.info = _setInfoByType(type, txt)
@@ -123,7 +123,7 @@ function _setInfoByType(type, txt) {
         case 'list':
             var todosTxt = txt.split(',')
             return {
-                lable: utilService.makeLorem(10),
+                lable: 'New list',
                 todos: todosTxt.map((todo) => {
                     return { txt: todo, doneAt: null }
                 })
@@ -136,55 +136,6 @@ function _setInfoByType(type, txt) {
             return { title: 'file sound', url: txt }
     }
 }
-
-function _createNote() {
-    var note = {
-        id: utilService.makeId(),
-        type: _getRandomType(),
-        isPinned: Math.random() > 0.8,
-        style: { backgroundColor: _getRandomColor() },
-        isEditMode: false
-    }
-    note.info = _getInfoByType(note.type)
-    gNotes.unshift(note)
-    _saveNotesToStorage()
-}
-
-function _getRandomColor() {
-    var colors = ['red','unset', 'blue', 'unset', 'green', 'unset', 'yellow', 'unset' , 'unset' , 'purple' , 'unset' , 'pink' , 'orange']
-    return colors.splice(utilService.getRandomInt(0, 12), 1)
-}
-
-function _getInfoByType(type) {
-    switch (type) {
-        case 'text':
-            return { txt: utilService.makeLorem(20) }
-        case 'list':
-            return {
-                lable: utilService.makeLorem(10),
-                todos: [
-                    { txt: utilService.makeLorem(5), doneAt: (Math.random() > 0.7) ? Date.now() : null },
-                    { txt: utilService.makeLorem(5), doneAt: (Math.random() > 0.7) ? Date.now() : null },
-                    { txt: utilService.makeLorem(5), doneAt: (Math.random() > 0.7) ? Date.now() : null },
-                    { txt: utilService.makeLorem(5), doneAt: (Math.random() > 0.7) ? Date.now() : null }
-                ]
-            }
-        case 'img':
-            return { title: 'New image', url: "assets/img/note-imgs/1.jpg" }
-        case 'video':
-            return { title: 'New video', url: "https://www.youtube.com/watch?v=w6vEE4NxlYw" }
-        case 'sound':
-            return { title: 'New sound', url: 'http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/music/menu.ogg' }
-    }
-}
-
-// UPDATE LATER
-function _getRandomType() {
-    var types = ['text', 'list', 'img', 'sound', 'video']
-    return types[utilService.getRandomInt(0, types.length - 1)]
-}
-
-
 
 function searchNote(searchTxt) {
     var notes = gNotes.filter((note) => {
@@ -224,9 +175,11 @@ function _createNotes() {
     gNotes = _loadNotesFromStorage()
     if (!gNotes || gNotes.length === 0) {
         gNotes = []
-        for (var i = 0; i < 30; i++) {
-            _createNote()
+        var notes = keepData.getNotes();
+        for (var i = 0; i < notes.length; i++) {
+            gNotes.unshift(notes[i])
         }
+        _saveNotesToStorage();
     }
 }
 
