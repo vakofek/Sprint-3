@@ -112,7 +112,9 @@ function addNote(txt, type) {
         isEditMode: false
     }
     note.info = _setInfoByType(type, txt)
+    console.log(note);
     gNotes.unshift(note);
+    console.log(gNotes);
     _saveNotesToStorage();
 }
 
@@ -131,8 +133,10 @@ function _setInfoByType(type, txt) {
             }
         case 'img':
             return { title: 'New image', url: txt }
-        case 'sound' || 'video':
-            return { title: 'file title', url: txt }
+        case 'video':
+            return { title: 'New video', url: txt }
+        case 'sound':
+            return { title: 'file sound', url: txt }
     }
 }
 
@@ -165,15 +169,17 @@ function _getInfoByType(type) {
             }
         case 'img':
             return { title: 'New image', url: "assets/img/note-imgs/1.jpg" }
-        case 'sound' || 'video':
-            return { title: utilService.makeLorem(10), url: 'img-src' }
+        case 'video':
+            return { title: 'New video', url: "https://www.youtube.com/watch?v=w6vEE4NxlYw" }
+        case 'sound':
+            return { title: 'New sound', url: 'http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/music/menu.ogg' }
     }
 }
 
 // UPDATE LATER
 function _getRandomType() {
     var types = ['text', 'list', 'img', 'sound', 'video']
-    return types[utilService.getRandomIntInclusive(0, 2)]
+    return types[utilService.getRandomIntInclusive(0, types.length - 1)]
 }
 
 
@@ -214,6 +220,9 @@ function _saveNotesToStorage() {
 function _loadNotesFromStorage() {
     return storageService.loadFromStorage(STORAGE_KEY)
 }
+
+
+
 
 
 //  SORT 
