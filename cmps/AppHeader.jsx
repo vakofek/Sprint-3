@@ -22,7 +22,7 @@ export class AppHeader extends React.Component {
                 <ul className="navbar">
                     <li><NavLink exact to="/">Home</NavLink></li>
                     <li><NavLink to="/book">Books</NavLink></li>
-                    <li><NavLink to="/mail">Email</NavLink></li>
+                    <li><NavLink to="/mail">Mail</NavLink></li>
                     <li><NavLink to="/keep">Keep</NavLink></li>
                 </ul>
             </nav>

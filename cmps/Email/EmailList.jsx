@@ -33,7 +33,6 @@ export class EmailList extends React.Component {
 
     componentWillUnmount() {
         this.removeFilterEvent()
-        // this.removeSortEvent()
     }
     onSortBy = (sortBy, sortTypeByIcon) => {
         var sort = { sortBy, sortTypeByIcon }
@@ -41,7 +40,6 @@ export class EmailList extends React.Component {
     }
 
     loadMails = () => {
-        // emailService.query(this.state.filterBy, this.state.sortBy)
         emailService.query(this.state.filterBy, this.state.sort)
             .then((mails) => {
                 this.setState({ mails })
