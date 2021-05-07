@@ -7,7 +7,7 @@ export class EmailDetails extends React.Component {
     state = {
         isLongTxtShown: false,
         mail: null,
-        action: ''
+        action: null
     }
 
     componentDidMount() {
@@ -32,7 +32,7 @@ export class EmailDetails extends React.Component {
         if (!mail) return <div>Loading...</div>
 
         return (
-            <section >
+            <section className="mail-details-container">
                 <div className="mail-details">
                     <button onClick={this.goBack} ><i className="fas fa-times"></i></button>
                     <h3>{mail.subject}</h3>
@@ -45,14 +45,14 @@ export class EmailDetails extends React.Component {
                         <h4>{mail.origin.to.mail}</h4>
                     </div>}
                     <p className="mail-details-body">{mail.body}</p>
-                    <div className="mail-details-btn-container">
+                    {!action && <div className="mail-details-btn-container">
                         <button onClick={() => {
                             this.setState({ action: 'reply' })
                         }}><i className="fas fa-reply"></i></button>
                         <button onClick={() => {
                             this.setState({ action: 'forward' })
                         }}><i className="far fa-share-square"></i></button>
-                    </div>
+                    </div>}
                 </div>
                 {action && <MailAction mail={mail} action={action} goBack={this.goBack} closeAction={() => { this.setState({ action: '' }) }} />}
             </section >

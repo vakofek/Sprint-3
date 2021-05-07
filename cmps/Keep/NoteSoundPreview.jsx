@@ -29,7 +29,7 @@ export class NoteSoundPreview extends React.Component {
         return (
             <div className={'note-card ' + this.state.note.style.backgroundColor}>
                 {!isEditMode && <div className="note-sound-card">
-                    <h1 onClick={() => { onToggleEditMode(this.state.note) }}>{info.title}</h1>
+                    <h2 onClick={() => { onToggleEditMode(this.state.note) }}>{info.title}</h2>
                     <audio controls>
                         <source src={info.url} type="audio/ogg" />
                     </audio>

@@ -1,3 +1,9 @@
+.mail-details-container{
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; */
+}
+
 .mail-details {
     position: relative;
     display: flex;
@@ -61,7 +67,6 @@
 }
 
 .mail-action {
-    margin-top: 20px;
     padding: 15px;
     box-shadow: 0 0 5px 0px #00000040;
     border-radius: 5px;

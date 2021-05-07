@@ -36,7 +36,7 @@ export class NoteVideoPreview extends React.Component {
         return (
             <div className={'note-card ' + this.state.note.style.backgroundColor}>
                 {!isEditMode && <div  className="note-video-card">
-                    <h1 onClick={() => { onToggleEditMode(this.state.note) }}>{info.title}</h1>
+                    <h2 onClick={() => { onToggleEditMode(this.state.note) }}>{info.title}</h2>
                     <iframe src={`https://www.youtube.com/embed/${this.getVideoId()}`}></iframe>
                 </div>}
                 {isEditMode && <div className="note-video-card">

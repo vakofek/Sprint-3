@@ -1,7 +1,7 @@
 .keep-app {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 
 .keep-app h1, h2, h3, h4, h5, h6, p, span, li {
@@ -36,19 +36,23 @@
     cursor: pointer;
 }
 
-.add-text-btn:hover{
+.add-text-btn:hover {
     color: rgb(0, 82, 206);
 }
-.add-img-btn:hover{
-    color: rgb(180, 105, 7); 
+
+.add-img-btn:hover {
+    color: rgb(180, 105, 7);
 }
-.add-video-btn:hover{
+
+.add-video-btn:hover {
     color: rgb(206, 0, 0);
 }
-.add-list-btn:hover{
+
+.add-list-btn:hover {
     color: rgb(182, 0, 206);
 }
-.add-sound-btn:hover{
+
+.add-sound-btn:hover {
     color: #1ac40b;
 }
 
@@ -71,7 +75,7 @@
 .note-gallery {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 
 .search-note input {
@@ -89,7 +93,6 @@
 .note-list {
     columns: 1;
     column-gap: 2.5vw;
-
 }
 
 @media (min-width:550px) {
@@ -119,7 +122,7 @@
 .note-card {
     margin-bottom: 3vw;
     padding-top: 1vw;
-    padding: 1em;
+    padding: 10px 20px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,10 +134,15 @@
     overflow: hidden;
     break-inside: avoid;
     border-radius: 5px;
+    min-height: 200px;
 }
 
 .note-card:hover .note-card-btn-container button {
     opacity: 100%;
+}
+
+.card-type-icon {
+    color: rgba(46, 46, 46, 0.479);
 }
 
 .note-card form {
@@ -168,10 +176,16 @@
     cursor: pointer;
 }
 
+.note-card h2 {
+    font-size: 1.2rem;
+}
+
 .note-text-card {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
+    flex: 1;
     gap: 10px;
 }
 
@@ -186,9 +200,14 @@
     color: #1ac40b;
 }
 
-/* .note-sound-card {
- 
-} */
+.note-sound-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+}
 
 .note-card audio {
     width: 100%;
@@ -221,7 +240,7 @@
 
 .note-card-btn-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 100%;
 }
 
@@ -257,10 +276,9 @@
     text-decoration: line-through;
 }
 
-.note-card-btn-container{
+.note-card-btn-container {
     position: relative;
 }
-
 
 .color-btn-container {
     display: flex;
@@ -268,13 +286,13 @@
     gap: 5px;
     position: absolute;
     top: 80%;
+    left: 12%;
     justify-content: center;
     align-items: center;
     padding: 2px;
     border-radius: 5px;
     cursor: unset;
     background-color: transparent;
-    z-index: 1;
 }
 
 .color-btn-container>button {
@@ -355,10 +373,10 @@
     background-color: #ee94d7;
 }
 
-.unset{
+.unset {
     background-color: rgb(245, 245, 245);
 }
 
-.unset:hover{
+.unset:hover {
     background-color: rgb(235, 235, 235);
 }

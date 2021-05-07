@@ -31,7 +31,7 @@ export class NoteImgPreview extends React.Component {
         return (
             <div className={'note-card ' + this.state.note.style.backgroundColor}>
                 {!isEditMode && <div className="note-img-card">
-                    <h1 onClick={() => { onToggleEditMode(this.state.note) }}>{info.title}</h1>
+                    <h2 onClick={() => { onToggleEditMode(this.state.note) }}>{info.title}</h2>
                     <img src={info.url} />
                 </div>}
                 {isEditMode && <div className="note-img-card">
@@ -42,7 +42,6 @@ export class NoteImgPreview extends React.Component {
                     <form onSubmit={this.onSaveChange}>
                         <input name="url" type="text" onChange={this.handleChange} placeholder='Enter image URL...' />
                     </form>
-
                 </div>}
                 <NoteCardActions updateStyle={updateStyle} onToggleEditMode={onToggleEditMode} onRemoveNote={onRemoveNote} onTogglePinned={onTogglePinned} note={note} />
             </div>
