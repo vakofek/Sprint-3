@@ -11,35 +11,38 @@ export class EmailList extends React.Component {
 
     state = {
         filterBy: 'received',
-        sortBy: null,
+        sort: null,
+        // sortBy: null,
         mails: null
     }
 
     removeFilterEvent;
-    removeSortEvent;
+    // removeSortEvent;
 
 
     componentDidMount() {
         this.removeFilterEvent = eventBusService.on('mail-set-filter', (filterBy) => {
             this.setState({ filterBy }, () => { this.loadMails() });
         })
-        this.removeSortEvent = eventBusService.on('mail-set-sort', (sortBy) => {
-            this.setState({ sortBy }, () => { this.loadMails() });
-        })
+        // this.removeSortEvent = eventBusService.on('mail-set-sort', (sortBy) => {
+        //     this.setState({ sortBy }, () => { this.loadMails() });
+        // })
 
         this.loadMails()
     }
 
     componentWillUnmount() {
         this.removeFilterEvent()
-        this.removeSortEvent()
+        // this.removeSortEvent()
     }
-    onSortBy = (sortBy) => {
-        this.setState({ sortBy }, () => this.loadMails())
+    onSortBy = (sortBy, sortTypeByIcon) => {
+        var sort = { sortBy, sortTypeByIcon }
+        this.setState({ sort }, () => this.loadMails())
     }
 
     loadMails = () => {
-        emailService.query(this.state.filterBy, this.state.sortBy)
+        // emailService.query(this.state.filterBy, this.state.sortBy)
+        emailService.query(this.state.filterBy, this.state.sort)
             .then((mails) => {
                 this.setState({ mails })
             })
@@ -61,11 +64,11 @@ export class EmailList extends React.Component {
                     <SearchMail OnSearchMail={this.OnSearchMail} loadMails={this.loadMails} />
                     <Sort onSortBy={this.onSortBy} />
                 </div>
-                    <Route component={EmailDetails} path="/mail/:mailId" />
+                <Route component={EmailDetails} path="/mail/:mailId" />
                 <div className="email-list">
-                { mails.map((mail) => {
-                    return <EmailPreview key={mail.mailId} mail={mail} loadMails={this.loadMails} />
-                })}
+                    {mails.map((mail) => {
+                        return <EmailPreview key={mail.mailId} mail={mail} loadMails={this.loadMails} />
+                    })}
                 </div>
             </section>
         )

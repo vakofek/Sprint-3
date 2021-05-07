@@ -20,47 +20,87 @@ var gMails = []
 const STORAGE_KEY = 'mails'
 _createMails()
 
-function query(filterBy, sortBy) {
+function query(filterBy, sort) {
+    console.log(sort);
     if (filterBy) {
-        if (!sortBy) return Promise.resolve(filterMails(filterBy))
+        if (!sort) return Promise.resolve(filterMails(filterBy))
         else {
             var filteredMails = filterMails(filterBy)
-            var sortedMailes = sortMailes(filteredMails, sortBy)
+            var sortedMailes = sortMailes(filteredMails, sort)
             return Promise.resolve(sortedMailes)
         }
     }
     return Promise.resolve(gMails)
 }
 
-function sortMailes(mailes, sortBy) {
+function sortMailes(mailes, sort) {
     var sortedMailes;
-    if (sortBy === 'byDate') {
-        sortedMailes = _sortByDate(mailes)
+    switch (sort.sortBy) {
+        case 'byDate':
+            sortedMailes = _sortByDate(mailes, sort.sortTypeByIcon)
+            break;
+        case 'bySubject':
+            sortedMailes = _sortBySubject(mailes, sort.sortTypeByIcon)
+            break;
+        case 'byRead':
+            sortedMailes = _sortByRead(mailes, sort.sortTypeByIcon)
+            break;
     }
-    else sortedMailes = _sortBySubject(mailes)
     return sortedMailes;
 }
 
-function _sortByDate(mailes) {
-    var sortedMailes = mailes.sort(function (mailA, mailB) {
-        return mailB.sentAt - mailA.sentAt;
+function _sortByDate(mailes, sortTypeByIcon) {
+    console.log('sortTypeByIcon', sortTypeByIcon);
+    return mailes.sort(function (mailA, mailB) {
+        console.log(mailB.sentAt);
+        return mailB.sentAt - mailA.sentAt
     });
-    return sortedMailes;
+    // var sortedMailes;
+    //     sortedMailes = mailes.sort(function (mailA, mailB) {
+    //         return  mailA.sentAt - mailB.sentAt ;
+    //         // return (sortTypeByIcon) ? mailB.sentAt - mailA.sentAt : mailA.sentAt - mailB.sentAt ;
+    //     });
+    // return sortedMailes;
 }
 
-function _sortBySubject(mailes) {
-    var sortedMailes = mailes.sort(function (a, b) {
-        var mailA = a.subject.toUpperCase();
-        var mailB = b.subject.toUpperCase();
-        if (mailA < mailB) {
-            return -1;
-        }
-        if (mailA > mailB) {
-            return 1;
-        }
-        return 0;
-    });
-    return sortedMailes;
+function _sortBySubject(mailes, sortTypeByIcon) {
+    if (sortTypeByIcon) {
+        return mailes.sort(function (a, b) {
+            var mailA = a.subject.toUpperCase();
+            var mailB = b.subject.toUpperCase();
+            if (mailA < mailB) {
+                return -1;
+            }
+            if (mailA > mailB) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+    else {
+        return mailes.sort(function (a, b) {
+            var mailA = a.subject.toUpperCase();
+            var mailB = b.subject.toUpperCase();
+            if (mailA > mailB) {
+                return -1;
+            }
+            if (mailA < mailB) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+}
+
+function _sortByRead(mailes, sortTypeByIcon) {
+    if (sortTypeByIcon)
+        return mailes.sort((mailA, mailB) => {
+            return (!mailA.isRead === !mailB.isRead) ? 0 : !mailA.isRead ? -1 : 1
+        })
+    else return mailes.sort((mailA, mailB) => {
+        return (mailA.isRead === mailB.isRead) ? 0 : mailA.isRead ? -1 : 1
+    })
+
 }
 
 function filterMails(filterBy) {
