@@ -1,5 +1,5 @@
 @import url(//db.onlinewebfonts.com/c/bdf273232619ad82be7bdba64f709172?family=EurocratW01-Light);
-
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
 @import url(../css/header.css);
 @import url(../css/home.css);
 @import url(../css/Book/books.css);
@@ -13,7 +13,6 @@
 @import url(../css/Email/Mail-details.css);
 @import url(../css/Keep/Keep.css);
 @import url(../css/Email/progress-bar.css);
-
 * {
     box-sizing: border-box;
 }
@@ -21,7 +20,7 @@
 body {
     margin: 0%;
     background-color: #eeeeee;
-    font-family: 'EurocratW01-light', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'EurocratW01-light', 'Rubik', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -55,19 +54,18 @@ a {
     color: unset;
     background-color: unset;
     margin: 0%;
-
 }
 
-ul{
+ul {
     padding: 0%;
 }
 
-main{
+main {
     margin-top: 15vh;
     padding: 2vw;
 }
 
-span{
+span {
     font-family: unset;
     font-weight: unset;
 }

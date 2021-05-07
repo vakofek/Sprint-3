@@ -1,8 +1,10 @@
 import { eventBusService } from '../../services/event-bus-service.js'
 import { emailService } from '../../services/Email/email.service.js'
 import { EmailPreview } from '../../cmps/Email/EmailPreview.jsx'
+import { EmailDetails } from '../../cmps/Email/EmailDetails.jsx'
 import { SearchMail } from '../../cmps/Email/SearchMail.jsx'
 import { Sort } from '../../cmps/Email/Sort.jsx'
+const { Route, Switch } = ReactRouterDOM
 
 
 export class EmailList extends React.Component {
@@ -59,6 +61,7 @@ export class EmailList extends React.Component {
                     <SearchMail OnSearchMail={this.OnSearchMail} loadMails={this.loadMails} />
                     <Sort onSortBy={this.onSortBy} />
                 </div>
+                    <Route component={EmailDetails} path="/mail/:mailId" />
                 <div className="email-list">
                 { mails.map((mail) => {
                     return <EmailPreview key={mail.mailId} mail={mail} loadMails={this.loadMails} />

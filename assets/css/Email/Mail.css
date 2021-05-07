@@ -1,22 +1,31 @@
 .email-app {
     display: flex;
     justify-content: flex-start;
-    gap: 2vw;
     width: 100%;
 }
 
 .email-side-nav {
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 20vw ;
+    width: 18vw;
+    gap: 10px;
 }
 
-.email-side-nav>* {
-    width: 20vw;
+.progress-bar{
+    width: 100%;
+}
+
+.email-side-nav-btn-conttainer>*:not(:first-child) {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 20px;
     border: none;
-    padding: 10px;
+    gap: 30px;
     font-size: 1.2rem;
+    color: rgb(46, 46, 46);
     font-family: inherit;
     text-align: center;
     cursor: pointer;
@@ -24,17 +33,24 @@
     border-top-right-radius: 20px;
 }
 
-.email-side-nav>*:hover {
+.email-side-nav-btn-conttainer>*:hover {
     background-color: rgb(255, 255, 255);
 }
 
 .add-mail-btn {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
-    background-color: transparent;
-    box-shadow: unset;
     padding: 10px 20px;
+    width: 20vw;
+    border: none;
+    gap: 20px;
+    font-size: 1.2rem;
+    font-family: inherit;
+    text-align: center;
+    cursor: pointer;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .add-mail-btn:hover {
@@ -62,7 +78,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    background-color: #e7eef1;
+    background-color: #ffffff;
     border-radius: 5px;
     padding: 15px;
     box-shadow: 0 0 5px 0px #00000040;
@@ -74,6 +90,7 @@
     padding: 8px;
     margin-bottom: 10px;
     border-radius: 5px;
+    background-color: #f1f1f1;
 }
 
 .add-mail textarea {
@@ -86,6 +103,7 @@
     font-family: inherit;
     font-size: 1rem;
     line-height: 1.5rem;
+    background-color: #f1f1f1;
 }
 
 .add-mail-btn-container {

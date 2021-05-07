@@ -1,7 +1,7 @@
 .keep-app {
     display: flex;
     flex-direction: column;
-    gap: 2vw;
+    gap: 10px;
 }
 
 .keep-app h1, h2, h3, h4, h5, h6, p, span, li {
@@ -13,7 +13,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 1vw;
-    background-color: #e6faff;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 4px 0px #00000013;
     border-radius: 5px;
     padding-inline-end: 10px;
 }
@@ -27,6 +28,8 @@
 .add-note-btn-container>* {
     background-color: transparent;
     border: none;
+    font-size: 1.2rem;
+    color: rgb(46, 46, 46);
 }
 
 .add-note-container button {
@@ -56,10 +59,11 @@
 .add-note-container input {
     font-family: inherit;
     font-size: 1.3rem;
-    background-color: #e6faff;
+    background-color: rgb(255, 255, 255);
     color: rgb(46, 46, 46);
     padding: 10px 20px;
     border: none;
+    border-radius: 5px;
     width: 100%;
     font-size: 1.3rem;
 }
@@ -67,7 +71,7 @@
 .note-gallery {
     display: flex;
     flex-direction: column;
-    gap: 2vw;
+    gap: 10px;
 }
 
 .search-note input {
@@ -77,17 +81,15 @@
     border: none;
     width: 100%;
     font-size: 1.3rem;
-    background-color: #e6faff;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 4px 0px #00000013;
     color: rgb(46, 46, 46);
-    background-image: url(../../img/search.png);
-    background-repeat: no-repeat;
-    background-size: 25px;
-    background-position: 98% 50%;
 }
 
 .note-list {
     columns: 1;
     column-gap: 2.5vw;
+
 }
 
 @media (min-width:550px) {
