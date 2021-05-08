@@ -50,17 +50,14 @@ function sortMailes(mailes, sort) {
 }
 
 function _sortByDate(mailes, sortTypeByIcon) {
-    console.log('sortTypeByIcon', sortTypeByIcon);
-    return mailes.sort(function (mailA, mailB) {
-        console.log(mailB.sentAt);
-        return mailB.sentAt - mailA.sentAt
+    if(sortTypeByIcon)  return mailes.sort(function (mailA, mailB) {
+        return new Date(mailA.sentAt).getTime() - new Date(mailB.sentAt).getTime()
     });
-    // var sortedMailes;
-    //     sortedMailes = mailes.sort(function (mailA, mailB) {
-    //         return  mailA.sentAt - mailB.sentAt ;
-    //         // return (sortTypeByIcon) ? mailB.sentAt - mailA.sentAt : mailA.sentAt - mailB.sentAt ;
-    //     });
-    // return sortedMailes;
+    return mailes.sort(function (mailA, mailB) {
+        return new Date(mailB.sentAt).getTime() - new Date(mailA.sentAt).getTime()
+    });
+   
+ 
 }
 
 function _sortBySubject(mailes, sortTypeByIcon) {
