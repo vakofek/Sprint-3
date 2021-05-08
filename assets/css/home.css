@@ -75,6 +75,7 @@
     background-color: #04b0d8;
     color: white;
     border-radius: 20px;
+    font-size: 0.7rem;
     font-family: 'EurocratW01-bold', 'Rubik', 'Segoe UI';
     padding: 0.5vw 4vw;
 }
@@ -84,6 +85,12 @@
     background-color: #04b1d800;
     color: #04b0d8;
     box-shadow: 0 0 0 2.5px #04b0d8;
+}
+
+@media (min-width:500px) {
+    .home-info-container>a {
+        font-size: 1rem;
+    }
 }
 
 .home-info-img {

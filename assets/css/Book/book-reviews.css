@@ -40,13 +40,13 @@
     gap: 5px;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 700px) {
     .user-info {
         flex-direction: column;
     }
 }
 
-@media (min-width: 1110px) {
+@media (min-width: 1070px) {
     .user-info {
         flex-direction: row;
     }
