@@ -23,7 +23,7 @@ export class UsersReviews extends React.Component {
                                 <h3> Review: </h3>
                                 <p>{userReview}</p>
                             </div>
-                            <button className="danger-btn" onClick={() => { this.props.onRemoveReview(reviewId) }}>Remove Review</button>
+                            <button className="danger-btn" onClick={() => { this.props.onRemoveReview(reviewId) }}><i className="far fa-trash-alt"></i></button>
                         </div>
                     )
                 })

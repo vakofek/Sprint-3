@@ -1,0 +1,63 @@
+.add-note-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1vw;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 4px 0px #00000013;
+    border-radius: 5px;
+    padding-inline-end: 10px;
+}
+
+.add-note-btn-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.add-note-btn-container>* {
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: rgb(46, 46, 46);
+}
+
+.add-note-container button {
+    cursor: pointer;
+}
+
+.add-text-btn:hover {
+    color: rgb(0, 82, 206);
+}
+
+.add-img-btn:hover {
+    color: rgb(180, 105, 7);
+}
+
+.add-video-btn:hover {
+    color: rgb(206, 0, 0);
+}
+
+.add-list-btn:hover {
+    color: rgb(182, 0, 206);
+}
+
+.add-sound-btn:hover {
+    color: #1ac40b;
+}
+
+.add-note-container form {
+    width: 100%;
+}
+
+.add-note-container input {
+    font-family: inherit;
+    font-size: 1.3rem;
+    background-color: rgb(255, 255, 255);
+    color: rgb(46, 46, 46);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1.3rem;
+}

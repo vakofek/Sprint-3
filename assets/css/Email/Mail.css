@@ -17,6 +17,36 @@
     width: 100%;
 }
 
+.curr-user-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.curr-user-info > *{
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.curr-user-info img{
+    width: 50px;
+}
+
+.curr-user-info img:hover{
+    transform: scale(1.1)
+}
+
+.curr-user-info button{
+    border: none;
+    font-size: 1.3rem;
+    background-color: transparent;
+}
+
+.curr-user-info button:hover{
+   color: #04b0d8; ;
+}
+
 .email-side-nav-btn-conttainer {
     display: flex;
     justify-content: center;
@@ -74,7 +104,7 @@
     }
 }
 
-.email-side-nav-btn-conttainer>*:hover {
+.email-side-nav-btn-conttainer>*:not(:first-child):hover {
     background-color: rgba(255, 255, 255, 0.644);
 }
 

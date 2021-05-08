@@ -42,6 +42,10 @@ export class EmailSideNav extends React.Component {
         return (
             <section className="email-side-nav">
                 <div className="email-side-nav-btn-conttainer">
+                    <div className="curr-user-info">
+                        <img src="assets\img\user-avatar.png"/>
+                        <button><i className="fas fa-sliders-h"></i></button>
+                    </div>
                     <NavLink className="add-mail-btn" to="/mail/add-mail"><i className="fas fa-plus"></i><span>Compose Mail</span></NavLink>
                     <NavLink className={this.getActiveClass('received')} onClick={() => { this.updateSelectedFilter('received') }}><i className="fas fa-inbox"></i><h3>Inbox</h3></NavLink>
                     <NavLink className={this.getActiveClass('starred')} onClick={() => { this.updateSelectedFilter('starred') }}><i className="far fa-star"></i><h3>Starred</h3></NavLink>

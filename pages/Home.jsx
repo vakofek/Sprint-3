@@ -16,7 +16,7 @@ export function Home() {
             <img className="hero-img" src="assets/img/hero.jpg" />
             <h1 className="hero-txt"> <span>Connect.</span><span> Collaborate.</span><span> Create.</span></h1>
             <div className="home-info-container">
-                <h1 className="home-info-txt">Loved by over 2 million users at 250,000 businesses around the world.</h1>
+                <h1 className="home-info-txt">Loved by over 2 million users at 250,000 businesses around the world</h1>
                 <img className="home-info-img book-bundle" src="assets/img/mockup/book-bundle.png" />
                 <img className="home-info-img mail-bundle" src="assets/img/mockup/mail-bundle.png" />
                 <img className="home-info-img keep-bundle" src="assets/img/mockup/keep-bundle.png" />

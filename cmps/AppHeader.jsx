@@ -14,10 +14,10 @@ export class AppHeader extends React.Component {
         const { pageName, logoUrl } = this.state.currPage
 
         return <header>
-            <div className="header-full-logo">
+            <NavLink exact to="/"><div className="header-full-logo">
                 <img src={logoUrl} />
                 <h1>{pageName}</h1>
-            </div>
+            </div></NavLink>
             <nav>
                 <ul className="navbar">
                     <li><NavLink exact to="/">Home</NavLink></li>

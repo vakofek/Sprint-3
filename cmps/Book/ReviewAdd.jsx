@@ -61,7 +61,7 @@ export class ReviewAdd extends React.Component {
                 </div>
                 <RateStars handleChange={this.handleChange} />
                 <textarea name="userReview" id="user-review" cols="30" rows="10" placeholder="Your thoughts about this book" onChange={this.handleChange} value={this.state.review.userReview}></textarea>
-                <button className="success-btn">Save</button>
+                <button className="success-btn"><i className="far fa-save"></i></button>
             </form>
         )
     }

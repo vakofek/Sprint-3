@@ -17,18 +17,21 @@
     gap: 0.5vh;
 }
 
-@media (min-width: 640px) {
+.review-form button {
+    width: 50px;
+    font-size: 1rem;
+}
+
+@media (min-width: 700px) {
     .review-area {
         flex-direction: row;
     }
-
     .review-form {
         max-width: 50%;
     }
-    
 }
 
-.user-info{
+.user-info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -37,24 +40,25 @@
     gap: 5px;
 }
 
-@media (min-width: 640px){
-    .user-info{
+@media (min-width: 640px) {
+    .user-info {
         flex-direction: column;
     }
 }
 
-@media (min-width: 1110px){
-    .user-info{
+@media (min-width: 1110px) {
+    .user-info {
         flex-direction: row;
     }
 }
 
-.review-form input{
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  width: 150px;
-  height: 30px;
+.review-form input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 150px;
+    height: 30px;
+    background-color: #f1f1f1;
 }
 
 .book-details textarea {
@@ -64,6 +68,7 @@
     margin-bottom: 10px;
     border: none;
     border-radius: 5px;
+    background-color: #f1f1f1;
 }
 
 .users-reviews {
@@ -83,12 +88,11 @@ h2.users-reviews {
     justify-content: space-between;
     align-items: center;
     gap: 1vh;
-    background-color: rgb(243, 243, 243);
     box-shadow: 0 0 4px 1px #00000038;
     border-radius: 5px;
     padding: 1vw;
 }
 
-.user-review button{
-width: 100px;
+.user-review button {
+    width: 50px;
 }

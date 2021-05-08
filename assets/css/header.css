@@ -26,6 +26,11 @@ header {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    transition: 0.3s;
+}
+
+.header-full-logo:hover {
+ transform: scale(1.1);
 }
 
 header img {
@@ -56,6 +61,10 @@ header h2 {
     font-weight: 600;
 }
 
+.navbar>* {
+ transition: 0.3s;
+}
+
 @media (min-width: 500px) {
     header img {
         height: 2rem;
@@ -73,6 +82,7 @@ header h2 {
 
 .navbar>*:hover {
     color: #04b0d8;
+    transform: scale(1.1);
 }
 
 .navbar *.active {
