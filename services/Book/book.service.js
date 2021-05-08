@@ -113,7 +113,11 @@ function addBook(bookInfo) {
 function _createBooks() {
     const books = _loadBooksFromStorage()
     if (books) gBooks = books
-    else gBooks = bookData.getBooks();
+    else {
+        gBooks = bookData.getBooks();
+        gBooks = utilService.arrayShuffle(gBooks)
+    }
+
     _saveBooksToStorage(gBooks)
 }
 
