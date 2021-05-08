@@ -14,6 +14,22 @@ const gBooks = [
         "authors": [
             " נפוליון היל",
         ],
+        reviews: [
+            {
+                rate: 5,
+                readAt: utilService.convertDateToFormat(utilService.randomDate()),
+                reviewId: utilService.makeId(),
+                userName: 'ירין',
+                userReview: `ספר מרתק ! שווה את המחיר`
+            },
+            {
+                rate: 4,
+                readAt: utilService.convertDateToFormat(utilService.randomDate()),
+                reviewId: utilService.makeId(),
+                userName: 'יוסי',
+                userReview: `ספר טוב`
+            }
+        ],
         "publishedDate": 2017,
         "description": `בספר זה, חולק אתכם נפוליון היל את הפילוסופיה המבריקה ואת הטכניקות המעשיות שלו להשגת יעדיכם הכספיים, למיצוי הפוטנציאל המרבי שלכם, ולבסוף ליצירת חיים המביאים לכם את האושר האישי הרב ביותר. הספר מלמד אתכם כיצד לרתום לפעולה את הפלא השכלי מעורר הכבוד של מוחכם. ניתנה בידכם תכנית לשליטה עצמית. אתם למדים שאין גבולות למה שאתם יכולים להשיג, פרט לאלה שאתם מטילים על עצמכם.`,
         "pageCount": 232,
@@ -36,6 +52,17 @@ const gBooks = [
         "authors": [
             "  צביקה גרמן",
         ],
+        reviews: [
+            {
+                rate: 3,
+                readAt: utilService.convertDateToFormat(utilService.randomDate()),
+                reviewId: utilService.makeId(),
+                userName: 'עדן',
+                userReview: `עדיף לעשות קורס.
+                הספר כמעט ולא הועיל לי `
+            }
+        ],
+
         "publishedDate": 2017,
         "description": `ספר זה הוא למעשה אנציקלופדיה מעשית ומרוכזת למשקיע. זה השער שלך לשוק ההון כאן תוכל ללמוד בעצמך בזמנך הפנוי וללא קושי בשיטת האימון האישי את כל האמת, הדרכים, המושגים, הטעויות, השיטות, הסודות, הטיפים והפרקטיקה של ההשקעה בשוק ההון מא' ועד ת' שיהפכו אותך למשקיע משובח. אם אתה קורא שורות אלה כבר החלה לחלחל אצלך ההבנה שאתה לא יכול להרשות לעצמך להיות בור, להזדחל מאחור ולא להבין בתורת ההשקעות בבורסה, במיוחד עכשיו שהספר הזה הופך הכל לקל פשוט וברור מאי פעם.
         בנוסף להסברים הברורים ושיטת הלימוד העצמי, בספר זה מופיעים לראשונה בספרות על שוק ההון בעברית כאן בישראל נושאים ושיעורים שלא תמצא באף ספר אחר.
@@ -391,6 +418,15 @@ Discover new properties including animations, grid, flexbox, masking, filtering,
         "authors": [
             "Rowling, J K"
         ],
+        reviews: [
+            {
+                rate: 5,
+                readAt: utilService.convertDateToFormat(utilService.randomDate()),
+                reviewId: utilService.makeId(),
+                userName: 'Jessica B',
+                userReview: `This is the third time I've read Harry Potter and the Sorcerer's Stone. I really enjoyed reading this along with Pottermore. Pottermore incorporates a lot of the details mentioned in the story. It was fun to pay attention to the little details this time since I know the story so well. I also liked reading the bonus material she wrote on Pottermore - it adds a lot to the story. I don't know if I realized this before, but J.K. Rowling is excellent at showing and not telling. For example: "[Mr. Dursley] hummed "Tiptoe Through the Tulips" and as he worked, jumped at small noises." She doesn't have to say that he's starting to lose it because I've decided that for myself. The books have so many fun characters that aren't in the movies. I love how optimistic and humble Harry is. I also like how light-hearted and quirky the books are. The movies tend to focus on the darker aspects of the story. I never get tired of reading these books.`
+            }
+        ],
         "publishedDate": 1997,
         "description": "This story is filled with dark comedy and crafted with a quality of writing that has garnered J.K. Rowling top awards in her country and ours. Harry Potter spent ten long years living with his aunt and uncle and stupid cousin, Dudley. Fortunately, Harry has a destiny that he was born to fulfill. One that will rocket him out of his dull life and into a unique experience at the Hogworts School of Witchcraft and Wizardry.",
         "pageCount": 312,
@@ -435,6 +471,23 @@ Discover new properties including animations, grid, flexbox, masking, filtering,
         "authors": [
             "Rowling, J K"
         ],
+        reviews: [
+            {
+                rate: 3,
+                readAt: utilService.convertDateToFormat(utilService.randomDate()),
+                reviewId: utilService.makeId(),
+                userName: 'kimaya',
+                userReview: `Nice book`
+            },
+            {
+                rate: 4,
+                readAt: utilService.convertDateToFormat(utilService.randomDate()),
+                reviewId: utilService.makeId(),
+                userName: 'piyas',
+                userReview: `just ok
+                Book 2 was better. This book was mainly about Harry Potters' parents. I wish that it was more exciting.`
+            }
+        ],
         "publishedDate": 1997,
         "description": "In his third year at Hogwarts School of Witchcraft and Wizardry, thirteen-year-old Harry learns to battle his fears with the help of the new Professor of Defense Against the Dark Arts. Along with Hermione and Ron, Harry encounters Sirius Black, who has escaped from Azkaban Prison and is looking for Harry.",
         "pageCount": 435,
@@ -456,6 +509,24 @@ Discover new properties including animations, grid, flexbox, masking, filtering,
         "subtitle": " Harry Potter and the Goblet of Fire",
         "authors": [
             "Rowling, J K"
+        ], reviews: [
+            {
+                rate: 4,
+                readAt: utilService.convertDateToFormat(utilService.randomDate()),
+                reviewId: utilService.makeId(),
+                userName: 'realsupergirl',
+                userReview: `age 8+ 
+                This is where the series turns
+                This is the book where the series gets darker and more serious. No one dies in the first three books, three people die in this book. And Harry learns just how dark and misguided government that ia supposed to protect people can be.`
+            },
+            {
+                rate: 5,
+                readAt: utilService.convertDateToFormat(utilService.randomDate()),
+                reviewId: utilService.makeId(),
+                userName: 'jsnowhite',
+                userReview: `Awesome!!!!!!!!!!!!!!!!!
+                I love this book. I started the first book when I was in kindergarten, I finished the second book over summer break, in first grade I read the third one, but so far the fourth one is the best. (In my opinion) I'm eight now and I've reread it about ten times. I recommend it for any kid who's looking for a great book.`
+            }
         ],
         "publishedDate": 2000,
         "description": "Harry Potter is midway through his training as a wizard and his coming of age. Harry wants to get away from the pernicious Dursleys and go to the International Quidditch Cup. He wants to find out about the mysterious event that's supposed to take place at Hogwarts this year, an event involving two other rival schools of magic, and a competition that hasn't happened for a hundred years. He wants to be a normal, fourteen-year-old wizard. But unfortunately for Harry Potter, he's not normal - even by wizarding standards. And in his case, different can be deadly.",

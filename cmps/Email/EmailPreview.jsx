@@ -80,7 +80,7 @@ export class EmailPreview extends React.Component {
 
     render() {
         const { mail } = this.props
-        if (!mail) return <div>Lading...</div>
+        if (!mail) return <div>Loading...</div>
         return (
             <section className={'mail-preview' + this.getReadClass()}>
                 <Link className="mail-preview-info" onClick={() => {

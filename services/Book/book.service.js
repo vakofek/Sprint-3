@@ -18,6 +18,7 @@ var gBooks = []
 const STORAGE_KEY = 'books'
 _createBooks()
 
+// center func , return the books from DB 
 function query(filterBy) {
     if (filterBy) {
         var { title, minPrice, maxPrice } = filterBy
@@ -31,59 +32,7 @@ function query(filterBy) {
     return Promise.resolve(gBooks)
 }
 
-
-function getBookById(bookId) {
-    var book = gBooks.find((book) => {
-        return book.id === bookId
-    })
-    return Promise.resolve(book)
-}
-
-function getCurrency(currencyCode) {
-    switch (currencyCode) {
-        case 'EUR':
-            return '€'
-        case 'ILS':
-            return '₪'
-        case 'USD':
-            return '$'
-        default:
-            break;
-    }
-}
-
-function getPriceColor(price) {
-    if (price > 150) return 'danger'
-    if (price < 20) return 'success'
-    return
-}
-
-function addReview(bookId, review) {
-    var book = gBooks.find((book) => {
-        return book.id === bookId
-    })
-    if (!book.reviews) book.reviews = []
-    review.reviewId = utilService.makeId()
-    book.reviews.push(review)
-}
-
-function removeReview(reviewId, bookId) {
-    var book = gBooks.find((book) => {
-        return book.id === bookId
-    })
-    var reviews = book.reviews
-    var reviewIdx = reviews.findIndex((review) => {
-        return review.reviewId === reviewId
-    })
-    book.reviews.splice(reviewIdx, 1)
-}
-
-function searchBook(bookTitle) {
-    const prm = axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${bookTitle}`)
-        .then(res => res.data)
-    return prm
-}
-
+// CRUD func area
 function addBook(bookInfo) {
     var { authors, categories, description, pageCount, title, language, publishedDate } = bookInfo.volumeInfo
     if (!categories) categories = ["Computers", "Hack"]
@@ -110,6 +59,62 @@ function addBook(bookInfo) {
     _saveBooksToStorage(gBooks)
 }
 
+function addReview(bookId, review) {
+    console.log(review);
+    var book = gBooks.find((book) => {
+        return book.id === bookId
+    })
+    if (!book.reviews) book.reviews = []
+    review.reviewId = utilService.makeId()
+    book.reviews.push(review)
+}
+
+function removeReview(reviewId, bookId) {
+    var book = gBooks.find((book) => {
+        return book.id === bookId
+    })
+    var reviews = book.reviews
+    var reviewIdx = reviews.findIndex((review) => {
+        return review.reviewId === reviewId
+    })
+    book.reviews.splice(reviewIdx, 1)
+}
+
+//  search book from google func  
+function searchBook(bookTitle) {
+    const prm = axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${bookTitle}`)
+        .then(res => res.data)
+    return prm
+}
+
+// geters func area 
+function getBookById(bookId) {
+    var book = gBooks.find((book) => {
+        return book.id === bookId
+    })
+    return Promise.resolve(book)
+}
+
+function getCurrency(currencyCode) {
+    switch (currencyCode) {
+        case 'EUR':
+            return '€'
+        case 'ILS':
+            return '₪'
+        case 'USD':
+            return '$'
+        default:
+            break;
+    }
+}
+
+function getPriceColor(price) {
+    if (price > 150) return 'danger'
+    if (price < 20) return 'success'
+    return
+}
+
+// load db func
 function _createBooks() {
     const books = _loadBooksFromStorage()
     if (books) gBooks = books
@@ -117,10 +122,10 @@ function _createBooks() {
         gBooks = bookData.getBooks();
         gBooks = utilService.arrayShuffle(gBooks)
     }
-
     _saveBooksToStorage(gBooks)
 }
 
+// storage func area
 function _saveBooksToStorage(books) {
     storageService.saveToStorage(STORAGE_KEY, books)
 }

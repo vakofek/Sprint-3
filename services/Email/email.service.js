@@ -1,4 +1,3 @@
-
 import { utilService } from '../util-service.js'
 import { storageService } from '../storage-service.js'
 import { mailData } from '../data/mail.data.js'
@@ -6,8 +5,6 @@ import { mailData } from '../data/mail.data.js'
 export const emailService = {
     query,
     getMailById,
-    addReview,
-    removeReview,
     addMail,
     toggleStar,
     removeMail,
@@ -20,6 +17,7 @@ var gMails = []
 const STORAGE_KEY = 'mails'
 _createMails()
 
+// center func , return the mails from DB after sort/filter if the user asked this
 function query(filterBy, sort) {
     if (filterBy) {
         if (!sort) return Promise.resolve(filterMails(filterBy))
@@ -32,6 +30,7 @@ function query(filterBy, sort) {
     return Promise.resolve(gMails)
 }
 
+// center sort func , use small sort func and return the right sort array
 function sortMailes(mailes, sort) {
     var sortedMailes;
     switch (sort.sortBy) {
@@ -97,6 +96,7 @@ function _sortByRead(mailes, sortTypeByIcon) {
 
 }
 
+// center sort func , use small sort func and return the right sort array
 function filterMails(filterBy) {
     switch (filterBy) {
         case 'sent':
@@ -112,41 +112,6 @@ function filterMails(filterBy) {
     }
 }
 
-function toggleStar(mailId) {
-    return Promise.resolve(
-        getMailById(mailId)
-            .then((mail) => {
-                mail.isStarred = !mail.isStarred
-                return mail
-            })
-    )
-}
-
-function toggleRead(mailId) {
-    return Promise.resolve(
-        getMailById(mailId)
-            .then((mail) => {
-                mail.isRead = !mail.isRead
-                return mail
-            })
-    )
-}
-
-function getReadStatistics() {
-    var readMails = gMails.filter((mail) => {
-        return mail.isRead === true
-    })
-    return Math.floor((readMails.length / gMails.length) * 100)
-}
-
-
-function removeMail(mailId) {
-    var mailIdx = getMailIdxById(mailId)
-    gMails.splice(mailIdx, 1)
-    _saveMailsToStorage()
-    return Promise.resolve()
-}
-
 function _filterByState(filterBy) {
     return gMails.filter((mail) => {
         return mail.state === filterBy
@@ -159,40 +124,7 @@ function _filterByKey(key) {
     })
 }
 
-function getMailById(mailId) {
-    var currMail = gMails.find((mail) => {
-        return mail.mailId === mailId
-    })
-    return Promise.resolve(currMail)
-}
-
-function getMailIdxById(mailId) {
-    return gMails.findIndex((mail) => {
-        return mail.mailId === mailId
-    })
-}
-
-
-function addReview(bookId, review) {
-    var book = gMails.find((book) => {
-        return book.id === bookId
-    })
-    if (!book.reviews) book.reviews = []
-    review.reviewId = utilService.makeId()
-    book.reviews.push(review)
-}
-
-function removeReview(reviewId, bookId) {
-    var book = gMails.find((book) => {
-        return book.id === bookId
-    })
-    var reviews = book.reviews
-    var reviewIdx = reviews.findIndex((review) => {
-        return review.reviewId === reviewId
-    })
-    book.reviews.splice(reviewIdx, 1)
-}
-
+// CRUD func area
 function addMail(info) {
     const { subject, to, body } = info
     var mail = {
@@ -213,7 +145,14 @@ function addMail(info) {
     _saveMailsToStorage();
 }
 
+function removeMail(mailId) {
+    var mailIdx = getMailIdxById(mailId)
+    gMails.splice(mailIdx, 1)
+    _saveMailsToStorage()
+    return Promise.resolve()
+}
 
+// search func
 function searchMail(searchTxt) {
     var mails = gMails.filter((mail) => {
         return mail.subject.includes(searchTxt) || mail.body.includes(searchTxt)
@@ -224,7 +163,49 @@ function searchMail(searchTxt) {
     return Promise.resolve(mails)
 }
 
+// geters func area 
+function getReadStatistics() {
+    var readMails = gMails.filter((mail) => {
+        return mail.isRead === true
+    })
+    return Math.floor((readMails.length / gMails.length) * 100)
+}
 
+function getMailById(mailId) {
+    var currMail = gMails.find((mail) => {
+        return mail.mailId === mailId
+    })
+    return Promise.resolve(currMail)
+}
+
+function getMailIdxById(mailId) {
+    return gMails.findIndex((mail) => {
+        return mail.mailId === mailId
+    })
+}
+
+// toggel func
+function toggleStar(mailId) {
+    return Promise.resolve(
+        getMailById(mailId)
+            .then((mail) => {
+                mail.isStarred = !mail.isStarred
+                return mail
+            })
+    )
+}
+
+function toggleRead(mailId) {
+    return Promise.resolve(
+        getMailById(mailId)
+            .then((mail) => {
+                mail.isRead = !mail.isRead
+                return mail
+            })
+    )
+}
+
+// load db func
 function _createMails() {
     gMails = _loadMailsFromStorage()
     if (!gMails || gMails.length === 0) {
@@ -238,6 +219,7 @@ function _createMails() {
     _saveMailsToStorage()
 }
 
+// storage func area
 function _saveMailsToStorage() {
     storageService.saveToStorage(STORAGE_KEY, gMails)
 }
