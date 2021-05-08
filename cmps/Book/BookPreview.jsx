@@ -16,10 +16,17 @@ export class BookPreview extends React.Component {
         }
     }
 
+    scrollUp = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }
+
     render() {
         const { book } = this.props
         return (
-            <Link to={`/book/${book.id}`}>
+            <Link onClick={this.scrollUp} to={`/book/${book.id}`}>
                 <section className="book-preview">
                     <h3>{book.title}</h3>
                     <img src={book.thumbnail} />
