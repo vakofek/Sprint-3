@@ -17,45 +17,55 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-    gap: 1vw;
+    gap: 3vh;
 }
 
 .book-details img {
-    box-shadow: 0 0 5px #00000042;
     max-width: 100%;
     min-width: 50px;
-}
-
-@media (min-width:560px) {
-    .book-details {
-        margin: 17vh 5vw 0vh;
-    }
-    .book-details-top {
-        flex-direction: row;
-    }
-    .book-details img {
-        max-width: 200px;
-    }
-}
-
-@media (min-width: 950px) {
-    .book-details img {
-        max-width: 250px;
-    }
 }
 
 .book-details-info {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 1vh;
+    gap: 3vh;
     width: 100%;
+    min-height: 400px;
+}
+
+@media (min-width:770px) {
+    .book-details {
+        margin: 17vh 5vw 0vh;
+    }
+    .book-details-top {
+        flex-direction: row;
+        gap: 1vh;
+    }
+    .book-details-info {
+        gap: 1vh;
+        min-height:100%;
+    }
+}
+
+@media (min-width: 950px) {
+    .book-details img {
+        max-width: 300px;
+    }
 }
 
 .book-details-info .book-categories {
     display: flex;
     align-items: center;
     gap: 1vw;
+    flex-wrap: wrap;
+}
+
+.book-details-info .book-categories div {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    flex-wrap: wrap;
 }
 
 .sign {
@@ -150,7 +160,7 @@
     box-shadow: unset
 }
 
-@media (min-width: 800px) {
+@media (min-width: 950px) {
     .book-details button.book-details-back-btn {
         position: absolute;
         top: 17px;

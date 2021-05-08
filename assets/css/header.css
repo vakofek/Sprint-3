@@ -50,11 +50,16 @@ header h2 {
     font-size: 1rem;
 }
 
+nav{
+    width: 100%;
+}
+
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 3vw;
+    width: 100%;
+    gap: 5vw;
     list-style: none;
     color: white;
     font-size: 1rem;
@@ -73,6 +78,10 @@ header h2 {
     
     header h1 {
         font-size: 2rem;
+    }
+
+    nav{
+        width: unset;
     }
     
     .navbar {

@@ -59,9 +59,11 @@ export class BookDetails extends React.Component {
                     <div className="book-details-info">
                         <div className="book-categories">
                             <span >[{book.categories.join(' , ')}]</span>
-                            {book.listPrice.isOnSale && <h2 className="sign sale-sign">ON SALE!</h2>}
-                            {this.getPageCountTxt(book.pageCount) && <h2 className="sign page-count-sign">{this.getPageCountTxt(book.pageCount)}</h2>}
-                            {this.getPublishedDateTxt(book.publishedDate) && <h2 className="sign publish-date-sign">{this.getPublishedDateTxt(book.publishedDate)}</h2>}
+                            <div>
+                                {book.listPrice.isOnSale && <h2 className="sign sale-sign">ON SALE!</h2>}
+                                {this.getPageCountTxt(book.pageCount) && <h2 className="sign page-count-sign">{this.getPageCountTxt(book.pageCount)}</h2>}
+                                {this.getPublishedDateTxt(book.publishedDate) && <h2 className="sign publish-date-sign">{this.getPublishedDateTxt(book.publishedDate)}</h2>}
+                            </div>
                         </div>
                         <h1>{book.title}</h1>
                         <h3>By <span>{book.authors.join(' , ')}</span></h3>
