@@ -1,7 +1,8 @@
-@import url(//db.onlinewebfonts.com/c/bdf273232619ad82be7bdba64f709172?family=EurocratW01-Light);
-@import url(//db.onlinewebfonts.com/c/58e8f2e074d2c99f1091846179434057?family=EurocratW01-Bold);
+@import url(https://db.onlinewebfonts.com/c/bdf273232619ad82be7bdba64f709172?family=EurocratW01-Light);
+@import url(https://db.onlinewebfonts.com/c/58e8f2e074d2c99f1091846179434057?family=EurocratW01-Bold);
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
 @import url(../css/header.css);
+@import url(../css/footer.css);
 @import url(../css/home.css);
 @import url(../css/Book/books.css);
 @import url(../css/Book/book-details.css);
@@ -18,6 +19,30 @@
 @import url(../css/Email/progress-bar.css);
 * {
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar-track {
+    background-color: #eeeeee;
+    border-radius: 10px;
+}
+
+
+html::-webkit-scrollbar {
+    background-color: #1b1b1b
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: #1b1b1b;
+    border-radius: 10px;
+    box-shadow: inset 1px 1px 2px 0px rgba(59, 59, 59, 0.486), inset -1px -1px 2px 0px rgba(0, 0, 0, 0.486);
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: #04b0d8;
 }
 
 body {
@@ -66,6 +91,7 @@ ul {
 
 main {
     margin-top: 15vh;
+    margin-bottom: 5vh;
     padding: 20px;
 }
 
@@ -119,3 +145,7 @@ button.secondary-btn:hover {
     background-color: rgb(129, 129, 129);
     color: white;
 }
+
+
+
+
