@@ -18,7 +18,7 @@ export class ProgressBar extends React.Component {
     }
 
     updateProgressBar = (percent) => {
-        this.setState({ progressBarData: { ...this.state.progressBarData, percent: percent, style: { ...this.state.progressBarData.style, width: this.props.onGetReadStatistics, backgroundColor: this.deterColor() } } })
+        this.setState({ progressBarData: { ...this.state.progressBarData, percent: percent, style: { ...this.state.progressBarData.style, width: (this.props.onGetReadStatistics + '%'), backgroundColor: this.deterColor() } } })
     }
 
   componentDidUpdate(prevProps , prevState){

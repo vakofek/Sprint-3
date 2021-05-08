@@ -209,13 +209,13 @@
     gap: 10px;
 }
 
-.note-card audio {
+.note-sound-card {
     width: 100%;
 }
 
-/* .note-video-card {
-
-} */
+.note-sound-card audio {
+    width: 100%;
+}
 
 .note-list-card span {
     text-align: start;
@@ -283,11 +283,11 @@
 .color-btn-container {
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     gap: 5px;
     position: absolute;
-    top: 80%;
-    left: 12%;
-    justify-content: center;
+    top: 95%;
     align-items: center;
     padding: 2px;
     border-radius: 5px;
