@@ -1,4 +1,4 @@
-.app-footer{
+.app-footer {
     position: fixed;
     bottom: 0;
     display: flex;
@@ -11,7 +11,6 @@
     padding: 0vw 5vw;
     box-shadow: 0 0 8px 1px #00000085;
     z-index: 5;
-
 }
 
 .footer-full-logo {
@@ -42,11 +41,15 @@ footer h2 {
     text-align: center;
 }
 
-footer h1:hover,h2:hover {
+footer h1:hover {
     color: #04b0d8;
 }
 
-@media (min-width: 500px){
+footer h2:hover {
+    color: #04b0d8;
+}
+
+@media (min-width: 500px) {
     footer img {
         height: 2rem;
         width: 3rem;
