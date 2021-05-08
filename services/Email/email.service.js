@@ -21,7 +21,6 @@ const STORAGE_KEY = 'mails'
 _createMails()
 
 function query(filterBy, sort) {
-    console.log(sort);
     if (filterBy) {
         if (!sort) return Promise.resolve(filterMails(filterBy))
         else {
@@ -50,14 +49,12 @@ function sortMailes(mailes, sort) {
 }
 
 function _sortByDate(mailes, sortTypeByIcon) {
-    if(sortTypeByIcon)  return mailes.sort(function (mailA, mailB) {
+    if (sortTypeByIcon) return mailes.sort(function (mailA, mailB) {
         return new Date(mailA.sentAt).getTime() - new Date(mailB.sentAt).getTime()
     });
     return mailes.sort(function (mailA, mailB) {
         return new Date(mailB.sentAt).getTime() - new Date(mailA.sentAt).getTime()
     });
-   
- 
 }
 
 function _sortBySubject(mailes, sortTypeByIcon) {
