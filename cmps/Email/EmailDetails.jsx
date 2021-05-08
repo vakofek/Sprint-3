@@ -44,6 +44,7 @@ export class EmailDetails extends React.Component {
                         <h4>{mail.origin.to.name}</h4>
                         <h4>{mail.origin.to.mail}</h4>
                     </div>}
+                    {(mail.imgUrl) && <img src={mail.imgUrl} />}
                     <p className="mail-details-body">{mail.body}</p>
                     {!action && <div className="mail-details-btn-container">
                         <button onClick={() => {

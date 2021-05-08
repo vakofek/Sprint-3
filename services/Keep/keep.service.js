@@ -19,53 +19,52 @@ var gNotes = []
 const STORAGE_KEY = 'notes'
 _createNotes()
 
-function query(filterBy, sortBy) {
-    if (filterBy) {
-        if (!sortBy) return Promise.resolve(_sortByPinned(filterMails(filterBy)))
-        else {
-            var filteredMails = filterMails(filterBy)
-            var sortedMailes = sortMailes(filteredMails, sortBy)
-            return Promise.resolve(_sortByPinned(sortedMailes))
-        }
-    }
+// center func , return the notes from DB 
+function query(sortBy) {
     return Promise.resolve(_sortByPinned(gNotes))
 }
 
-
+// sort by pinned func
 function _sortByPinned(notes) {
     return notes.sort((noteA, noteB) => {
         return (noteA.isPinned === noteB.isPinned) ? 0 : noteA.isPinned ? -1 : 1
     })
 }
 
-function toggleIsPinned(noteId) {
-    return Promise.resolve(
-        getNoteById(noteId)
-            .then((note) => {
-                note.isPinned = !note.isPinned
-                return note
-            })
-    )
+// CRUD func area
+function addNote(txt, type) {
+    var note = {
+        id: utilService.makeId(),
+        type: type,
+        isPinned: false,
+        style: { backgroundColor: utilService.getRandomColor() },
+        isEditMode: false
+    }
+    note.info = _setInfoByType(type, txt)
+    gNotes.unshift(note);
+    _saveNotesToStorage();
 }
 
-function toggleIsEditMode(noteId) {
-    return Promise.resolve(
-        getNoteById(noteId)
-            .then((note) => {
-                note.isEditMode = !note.isEditMode
-                return note
-            })
-    )
-}
-
-function toggleTodo(todoIdx, note) {
-    var noteIdx = getNoteIdxById(note.id)
-    var todo = note.info.todos[todoIdx]
-    todo = { txt: todo.txt, doneAt: (!todo.doneAt) ? Date.now() : null }
-    note.info.todos.splice(todoIdx, 1, todo)
-    gNotes.splice(noteIdx, 1, note)
-    _saveNotesToStorage()
-    return Promise.resolve()
+// helper func to set note info by note type
+function _setInfoByType(type, txt) {
+    switch (type) {
+        case 'text':
+            return { txt }
+        case 'list':
+            var todosTxt = txt.split(',')
+            return {
+                lable: 'New list',
+                todos: todosTxt.map((todo) => {
+                    return { txt: todo, doneAt: null }
+                })
+            }
+        case 'img':
+            return { title: 'New image', url: txt }
+        case 'video':
+            return { title: 'New video', url: txt }
+        case 'sound':
+            return { title: 'file sound', url: txt }
+    }
 }
 
 function removeNote(noteId) {
@@ -90,53 +89,7 @@ function updateNoteStyle(color, noteId) {
     return Promise.resolve()
 }
 
-function getNoteById(noteId) {
-    var currNote = gNotes.find((note) => {
-        return note.id === noteId
-    })
-    return Promise.resolve(currNote)
-}
-
-function getNoteIdxById(noteId) {
-    return gNotes.findIndex((note) => {
-        return note.id === noteId
-    })
-}
-
-function addNote(txt, type) {
-    var note = {
-        id: utilService.makeId(),
-        type: type,
-        isPinned: false,
-        style: { backgroundColor: utilService.getRandomColor() },
-        isEditMode: false
-    }
-    note.info = _setInfoByType(type, txt)
-    gNotes.unshift(note);
-    _saveNotesToStorage();
-}
-
-function _setInfoByType(type, txt) {
-    switch (type) {
-        case 'text':
-            return { txt }
-        case 'list':
-            var todosTxt = txt.split(',')
-            return {
-                lable: 'New list',
-                todos: todosTxt.map((todo) => {
-                    return { txt: todo, doneAt: null }
-                })
-            }
-        case 'img':
-            return { title: 'New image', url: txt }
-        case 'video':
-            return { title: 'New video', url: txt }
-        case 'sound':
-            return { title: 'file sound', url: txt }
-    }
-}
-
+// search note func
 function searchNote(searchTxt) {
     var notes = gNotes.filter((note) => {
         return _getSearchNote(note, searchTxt)
@@ -171,6 +124,52 @@ function _searchInList(note, searchTxt) {
     return true
 }
 
+// geters func area 
+function getNoteById(noteId) {
+    var currNote = gNotes.find((note) => {
+        return note.id === noteId
+    })
+    return Promise.resolve(currNote)
+}
+
+function getNoteIdxById(noteId) {
+    return gNotes.findIndex((note) => {
+        return note.id === noteId
+    })
+}
+
+// toggel func
+function toggleIsPinned(noteId) {
+    return Promise.resolve(
+        getNoteById(noteId)
+            .then((note) => {
+                note.isPinned = !note.isPinned
+                return note
+            })
+    )
+}
+
+function toggleIsEditMode(noteId) {
+    return Promise.resolve(
+        getNoteById(noteId)
+            .then((note) => {
+                note.isEditMode = !note.isEditMode
+                return note
+            })
+    )
+}
+
+function toggleTodo(todoIdx, note) {
+    var noteIdx = getNoteIdxById(note.id)
+    var todo = note.info.todos[todoIdx]
+    todo = { txt: todo.txt, doneAt: (!todo.doneAt) ? Date.now() : null }
+    note.info.todos.splice(todoIdx, 1, todo)
+    gNotes.splice(noteIdx, 1, note)
+    _saveNotesToStorage()
+    return Promise.resolve()
+}
+
+// load db func
 function _createNotes() {
     gNotes = _loadNotesFromStorage()
     if (!gNotes || gNotes.length === 0) {
@@ -179,11 +178,12 @@ function _createNotes() {
         for (var i = 0; i < notes.length; i++) {
             gNotes.unshift(notes[i])
         }
-        gNotes=utilService.arrayShuffle(gNotes)
+        gNotes = utilService.arrayShuffle(gNotes)
     }
     _saveNotesToStorage();
 }
 
+// storage func area
 function _saveNotesToStorage() {
     storageService.saveToStorage(STORAGE_KEY, gNotes)
 }
@@ -192,3 +192,16 @@ function _loadNotesFromStorage() {
     return storageService.loadFromStorage(STORAGE_KEY)
 }
 
+
+
+// function query(filterBy, sortBy) {
+//     if (filterBy) {
+//         if (!sortBy) return Promise.resolve(_sortByPinned(filterMails(filterBy)))
+//         else {
+//             var filteredMails = filterMails(filterBy)
+//             var sortedMailes = sortMailes(filteredMails, sortBy)
+//             return Promise.resolve(_sortByPinned(sortedMailes))
+//         }
+//     }
+//     return Promise.resolve(_sortByPinned(gNotes))
+// }

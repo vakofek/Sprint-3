@@ -10,6 +10,7 @@ export class UsersReviews extends React.Component {
 
     render() {
         if (!this.props.book.reviews || this.props.book.reviews.length === 0) return <h2 className="users-reviews">Be the first to review this book!</h2>
+       
         return (
             <div className="users-reviews">
                 {this.props.book.reviews && this.props.book.reviews.map((review) => {
