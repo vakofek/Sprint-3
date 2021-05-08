@@ -15,6 +15,37 @@
     flex-direction: column-reverse;
 }
 
+.hero-txt {
+    font-size: 2em;
+    font-family: 'EurocratW01-Bold', 'Rubik', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-shadow: 0 0 7px #ffffffb8;
+    padding: 20px;
+    position: absolute;
+    top: 20vh;
+    right: 0vw;
+}
+
+@media (min-width: 550px) {
+    .hero-txt {
+        top: 12vh;
+        font-size: 3em;
+    }
+}
+
+.hero-txt span {
+    font-size: inherit;
+    font-family: inherit;
+    color: rgba(53, 53, 53, 0.726);
+}
+
+.hero-txt span:first-child {
+    color: rgba(17, 17, 17, 0.726);
+}
+
+.hero-txt span:last-child {
+    color: #04b0d8;
+}
+
 .home-info-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

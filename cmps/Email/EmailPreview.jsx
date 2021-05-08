@@ -28,7 +28,7 @@ export class EmailPreview extends React.Component {
         if (mm < 10) {
             mm = '0' + mm;
         }
-        return yyyy + '-' + mm + '-' + dd;
+        return dd + '-' + mm + '-' + yyyy;
     }
 
     getStarClass = () => {
@@ -83,10 +83,10 @@ export class EmailPreview extends React.Component {
         if (!mail) return <div>Lading...</div>
         return (
             <section className={'mail-preview' + this.getReadClass()}>
-                <Link className="mail-preview-info" onClick={()=>{
+                <Link className="mail-preview-info" onClick={() => {
                     this.onToggleRead()
                     this.scrollUp()
-                    }} to={`/mail/${mail.mailId}`}>
+                }} to={`/mail/${mail.mailId}`}>
                     <h3 className="mail-preview-subject">{this.getShortTxt(mail.subject, 50)}</h3>
                     <h3 className="mail-preview-body">{this.getShortTxt(mail.body, 200)}</h3>
                     <h3 className="mail-preview-date">{this.getSentAtTime(mail.sentAt)}</h3>

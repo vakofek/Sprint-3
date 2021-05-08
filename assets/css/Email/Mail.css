@@ -1,20 +1,27 @@
 .email-app {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
+    gap: 20px;
     width: 100%;
+}
+
+@media (min-width: 800px){
+    .email-app {
+        flex-direction: row;
+    }
 }
 
 .email-side-nav {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 18vw;
-    gap: 10px;
+    position: static;
+    width: 100%;
 }
 
-.progress-bar{
-    width: 100%;
+.email-side-nav-btn-conttainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .email-side-nav-btn-conttainer>*:not(:first-child) {
@@ -31,15 +38,12 @@
     cursor: pointer;
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
-}
-
-.email-side-nav-btn-conttainer>*:hover {
-    background-color: rgb(255, 255, 255);
+    width: 100%;
 }
 
 .add-mail-btn {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     padding: 10px 20px;
     width: 20vw;
@@ -51,7 +55,38 @@
     cursor: pointer;
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
+    width: 100%;
 }
+
+@media (min-width: 800px){
+    .email-side-nav {
+        position: fixed;
+        width: 18vw;
+    }
+
+    .email-side-nav-btn-conttainer {
+        align-items: flex-start;
+        width: unset;
+    }
+
+    .add-mail-btn {
+        justify-content: flex-start;
+    }
+}
+
+.email-side-nav-btn-conttainer>*:hover {
+    background-color: rgba(255, 255, 255, 0.644);
+}
+
+.email-side-nav-btn-conttainer a.active {
+    background-color: rgba(255, 255, 255, 0.644);
+}
+
+.progress-bar{
+    width: 100%;
+    padding-top: 20px;
+}
+
 
 .add-mail-btn:hover {
     background-color: transparent;
@@ -69,8 +104,14 @@
 }
 
 .email-container {
-    flex: 1;
-    width: 70vw;
+    width: 100%;
+}
+
+@media (min-width: 800px){
+    .email-container {
+        flex: 1;
+        width: 70vw;
+    }
 }
 
 .add-mail {
