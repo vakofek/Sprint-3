@@ -233,6 +233,7 @@ function _createMails() {
         for (var i = 0; i < mails.length; i++) {
             gMails.unshift(mails[i])
         }
+        gMails = utilService.arrayShuffle(gMails);
     }
     _saveMailsToStorage()
 }

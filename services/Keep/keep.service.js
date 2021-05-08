@@ -179,8 +179,9 @@ function _createNotes() {
         for (var i = 0; i < notes.length; i++) {
             gNotes.unshift(notes[i])
         }
-        _saveNotesToStorage();
+        gNotes=utilService.arrayShuffle(gNotes)
     }
+    _saveNotesToStorage();
 }
 
 function _saveNotesToStorage() {
@@ -191,80 +192,3 @@ function _loadNotesFromStorage() {
     return storageService.loadFromStorage(STORAGE_KEY)
 }
 
-
-
-
-
-//  SORT 
-
-// function sortMailes(mailes, sortBy) {
-//     var sortedMailes;
-//     if (sortBy === 'byDate') {
-//         sortedMailes = _sortByDate(mailes)
-//     }
-//     else sortedMailes = _sortBySubject(mailes)
-//     return sortedMailes;
-// }
-
-// function _sortByDate(mailes) {
-//     var sortedMailes = mailes.sort(function (mailA, mailB) {
-//         return mailA.sentAt - mailB.sentAt;
-//     });
-//     return sortedMailes;
-// }
-
-// function _sortBySubject(mailes) {
-//     var sortedMailes = mailes.sort(function (a, b) {
-//         var mailA = a.subject.toUpperCase();
-//         var mailB = b.subject.toUpperCase();
-//         if (mailA < mailB) {
-//             return -1;
-//         }
-//         if (mailA > mailB) {
-//             return 1;
-//         }
-//         return 0;
-//     });
-//     return sortedMailes;
-// }
-
-
-// FILTER 
-
-
-// function filterMails(filterBy) {
-//     switch (filterBy) {
-//         case 'sent':
-//             return _filterByState(filterBy)
-//         case 'received':
-//             return _filterByState(filterBy)
-//         case 'starred':
-//             return _filterByKey('isStarred')
-//         case 'drafts':
-//             return _filterByKey('isDraft')
-//         case 'read':
-//             return _filterByKey('isRead')
-//     }
-// }
-
-// function _filterByState(filterBy) {
-//     return gNotes.filter((mail) => {
-//         return mail.state === filterBy
-//     })
-// }
-
-// function _filterByKey(key) {
-//     return gNotes.filter((mail) => {
-//         return mail[key] === true
-//     })
-// }
-
-
-// GET STATISTIC
-
-// function getReadStatistics() {
-//     var readMails = gNotes.filter((mail) => {
-//         return mail.isRead === true
-//     })
-//     return Math.floor((readMails.length / gNotes.length) * 100)
-// }

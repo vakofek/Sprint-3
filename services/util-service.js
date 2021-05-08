@@ -4,7 +4,8 @@ export const utilService = {
     makeLorem,
     getRandomInt,
     randomDate,
-    getRandomColor
+    getRandomColor,
+    arrayShuffle
 }
 
 function makeId(length = 6) {
@@ -43,4 +44,12 @@ function randomDate() {
 function getRandomColor() {
     var colors = ['red', 'unset', 'blue', 'unset', 'green', 'unset', 'yellow', 'unset', 'unset', 'purple', 'unset', 'pink', 'orange']
     return colors.splice(getRandomInt(0, 12), 1)
+}
+
+function arrayShuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
